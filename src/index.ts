@@ -1,0 +1,29 @@
+
+import { MutationTracker } from "./mutation-tracker";
+
+var user = {
+	name: {
+		firstname: "john",
+		lastname: "jane"
+	},
+	address: "123 Happy Street"
+}
+
+var tracker = MutationTracker(user, {
+	initiallyMutatedAttributes: [
+		"name.firstname"
+	]
+});
+
+console.log(JSON.stringify(tracker.state));
+// { name: { firstname: true, lastname: false }, address: false }
+
+tracker.setMutatedByAttributeName(true, "name.lastname");
+
+console.log(JSON.stringify(tracker.state));
+// { name: { firstname: true, lastname: true }, address: false }
+
+tracker.clear();
+
+console.log(JSON.stringify(tracker.state));
+// { name: { firstname: false, lastname: false }, address: false }

@@ -1,0 +1,170 @@
+# mutation-tracker 1.0.0
+
+### What?
+Mutation Tracker is born out of a need to track **dirty** state of properties within JavaScript objects.
+
+### How?
+Mutation Tracker maintains a mirror object, created of the source object, for which we need to track attribute mutation.
+When there is a change in one of the attribute of the object, using the provided APIs we can mark the equivalent  attribute in
+the object maintained by Mutation Tracker.
+
+### Why?
+A major use case of Mutation Tracker library is to track the dirty state of HTML Form Fields.
+
+### Usage?
+
+Consider the HTML below:
+
+In a browser:
+```browser
+<input type="text" id="firstname" />
+<input type="text" id="lastname" />
+<textarea id="address"></textarea>
+```
+The JavaScript object below represents the state of a HTML form above:
+```javascript
+var user = {
+	name: {
+		firstname: "john",
+		lastname: "jane"
+	},
+	address: "123 Happy Street"
+}
+```
+To track changes in the object above, we can mark those property changes as follows.
+
+```javascript
+
+import { MutationTracker } from "./mutation-tracker";
+
+// create a new instance of mutation-tracker
+var tracker = MutationTracker(user, {});
+
+// set name.firstname property as mutated
+tracker.setMutatedByAttributeName(true, "name.firstname");
+
+console.log(JSON.stringify(tracker.state));
+// { name: { firstname: true, lastname: false }, address: false }
+```
+
+### Samples
+
+#### 1 - Initialization *with* Type
+
+```javascript
+var tracker = MutationTracker(user, {});
+console.log(JSON.stringify(tracker.state));
+// { name: { firstname: false, lastname: false }, address: false }
+```
+
+#### 2 - Initialization *without* Type
+
+```javascript
+var tracker = MutationTracker({}, {});
+console.log(JSON.stringify(tracker.state));
+// {}
+```
+
+#### 3 - Set mutated to *true* for Type
+
+```javascript
+var tracker = MutationTracker(user, {});
+tracker.setMutatedByAttributeName(true, "name.firstname");
+console.log(JSON.stringify(tracker.state));
+// { name: { firstname: true, lastname: false }, address: false }
+```
+
+#### 4 - Set mutated to *true* for without Type
+
+```javascript
+var tracker = MutationTracker({}, {});
+tracker.setMutatedByAttributeName(true, "name.firstname");
+console.log(JSON.stringify(tracker.state));
+// { name: { firstname: true }
+```
+
+#### 5 - Set mutated to true on initialization
+
+```javascript
+var tracker = MutationTracker(user, {
+	initiallyMutatedAttributes: [
+		"name.firstname",
+		"name.lastname"
+	]
+});
+console.log(JSON.stringify(tracker.state));
+// { name: { firstname: true, lastname: true }, address: false }
+```
+
+#### 6 - Set multiple mutations
+
+```javascript
+var tracker = MutationTracker(user, {});
+tracker.setMutatedByAttributeNames(true, [
+	"name.firstname",
+	"name.lastname"
+]);
+console.log(JSON.stringify(tracker.state));
+// { name: { firstname: true, lastname: true }, address: false }
+```
+#### 7 - Set All mutations
+
+```javascript
+var tracker = MutationTracker(user, {});
+tracker.setAll(true);
+console.log(JSON.stringify(tracker.state));
+// { name: { firstname: true, lastname: true }, address: true }
+```
+
+
+#### 8 - Reset mutations
+
+```javascript
+var tracker = MutationTracker(user, {
+	initiallyMutatedAttributes: [
+		"name.firstname"
+	]
+});
+console.log(JSON.stringify(tracker.state));
+// { name: { firstname: true, lastname: false }, address: false }
+tracker.setMutatedByAttributeName(true, "name.lastname");
+console.log(JSON.stringify(tracker.state));
+// { name: { firstname: true, lastname: true }, address: false }
+tracker.reset();
+console.log(JSON.stringify(tracker.state));
+// { name: { firstname: true, lastname: false }, address: false }
+```
+
+#### 9 - Clear mutations
+
+```javascript
+var tracker = MutationTracker(user, {
+	initiallyMutatedAttributes: [
+		"name.firstname"
+	]
+});
+console.log(JSON.stringify(tracker.state));
+// { name: { firstname: true, lastname: false }, address: false }
+
+tracker.setMutatedByAttributeName(true, "name.lastname");
+console.log(JSON.stringify(tracker.state));
+// { name: { firstname: true, lastname: true }, address: false }
+
+tracker.clear();
+console.log(JSON.stringify(tracker.state));
+// { name: { firstname: false, lastname: false }, address: false }
+```
+
+## Documentation
+
+| Property/Function  |  Description |
+| ------------ | ------------ |
+|  MutationTracker() | constructor   |
+|  setMutatedByAttributeName() | sets mutation flag for a qualified attribute name  |
+| setMutatedByAttributeNames()  |  sets mutation flag for multiple qualified attribute names  |
+| reset()  |  Sets mutation tracking back to the initialized state such as reapplying initial mutation settings |
+| setAll()  |  Sets mutation for tracked attributes to *true* |
+| clear()  |  For tracking Without *Type*, removes all mutation tracking. For  tracking with a *Type*, sets all mutations to *false* |
+| initiallyMutatedAttributes  | Returns list of qualified attribute names, initially set for mutations |
+| state  | Returns object that represents current state of tracked mutations |
+

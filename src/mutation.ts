@@ -1,0 +1,96 @@
+import { cloneDeep, isInteger, isObject, toPath } from "lodash";
+
+/**
+ * Get mutation/descriptor on the Attribute
+ */
+export function GetAttribute(
+  obj: any,
+  key: string | string[],
+  def?: any,
+  p: number = 0
+) {
+  const path = toPath(key);
+  while (obj && p < path.length) {
+    obj = obj[path[p++]];
+  }
+
+  if (p !== path.length && !obj) {
+    return def;
+  }
+
+  return obj === undefined ? def : obj;
+}
+
+/**
+ * Set new mutation/descriptor for the Attribute 
+ */
+export function setAllAttributesMuted<T>(
+  object: any,
+  value: T,
+  visited: any = new WeakMap(),
+  response: any = {}
+): any {
+  for (let k of Object.keys(object)) {
+    const val = object[k];
+    if (isObject(val)) {
+      if (!visited.get(val)) {
+        visited.set(val, true);
+        response[k] = Array.isArray(val) ? [] : {};
+        setAllAttributesMuted(val, value, visited, response[k]);
+      }
+    } else {
+      response[k] = value;
+    }
+  }
+  return response;
+}
+
+/**
+ * Set mutation/descriptor on multiple Attributes at the same time
+ */
+export function setAttributeMutatedMultiple<T>(obj: any, value: T, ...paths: string[]): any {
+  paths.forEach((path) => {
+    obj = setAttributeMutated(obj, value, path);
+  });
+
+  return obj;
+}
+
+/**
+ * Set mutation/descriptor on an Attribute
+ */
+export function setAttributeMutated<T>(obj: any, value: T, path: string): any {
+  let res: any = cloneDeep(obj);
+  let resVal: any = res;
+  let i = 0;
+  let pathArray = toPath(path);
+
+  for (; i < pathArray.length - 1; i++) {
+    const currentPath: string = pathArray[i];
+    let currentObj: any = GetAttribute(obj, pathArray.slice(0, i + 1));
+
+    if (currentObj && (isObject(currentObj) || Array.isArray(currentObj))) {
+      resVal = resVal[currentPath] = cloneDeep(currentObj);
+    } else {
+      const nextPath: string = pathArray[i + 1];
+      resVal = resVal[currentPath] =
+        isInteger(nextPath) && Number(nextPath) >= 0 ? [] : {};
+    }
+  }
+
+  if ((i === 0 ? obj : resVal)[pathArray[i]] === value) {
+    return obj;
+  }
+
+  if (value === undefined) {
+    delete resVal[pathArray[i]];
+  } else {
+    resVal[pathArray[i]] = value;
+  }
+
+  if (i === 0 && value === undefined) {
+    delete res[pathArray[i]];
+  }
+
+  return res;
+}
