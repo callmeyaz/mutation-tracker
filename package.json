@@ -1,6 +1,11 @@
 {
   "name": "mutation-tracker",
   "version": "1.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/callmeyaz/mutation-tracker.git"
+  },
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
