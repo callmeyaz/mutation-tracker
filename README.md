@@ -1,7 +1,7 @@
 # mutation-tracker 1.0.0
 
 ### What?
-Mutation Tracker is born out of a need to track **dirty** state of properties within JavaScript objects.
+Mutation Tracker is born out of a need to track and manage **dirty** state of properties within JavaScript objects.
 
 ### How?
 Mutation Tracker maintains a mirror object, optionally created using the target object, which we need to track for attribute mutations.
