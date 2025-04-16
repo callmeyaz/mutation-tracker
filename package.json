@@ -1,6 +1,6 @@
 {
   "name": "mutation-tracker",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -12,6 +12,7 @@
     "dev": "npm run build && npm run start",
     "watch": "tsc -w"
   },
+  "types": "./types/**/*.d.ts",
   "devDependencies": {
     "@types/lodash": "^4.17.16",
     "lodash": "^4.17.21",
