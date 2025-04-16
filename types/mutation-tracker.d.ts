@@ -4,8 +4,8 @@ export interface MutationConfig {
 }
 /**
  *
- * @param config Configuration object.
- * @returns Returns mutation tracker instance.
+ * @param config - Configuration object.
+ * @returns - Returns mutation tracker instance.
  */
 declare function track<Values extends KeyValuePair = KeyValuePair>(target: Values, config: MutationConfig): {
     readonly initiallyMutatedAttributes: string[];

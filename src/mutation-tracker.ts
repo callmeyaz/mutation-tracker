@@ -14,8 +14,8 @@ export interface MutationConfig {
 
 /**
  * 
- * @param config Configuration object.
- * @returns Returns mutation tracker instance.
+ * @param config - Configuration object.
+ * @returns - Returns mutation tracker instance.
  */
 function track<Values extends KeyValuePair = KeyValuePair>(target: Values, config: MutationConfig) {
     const _initialMutation = buildMutationFromObject(target, false);

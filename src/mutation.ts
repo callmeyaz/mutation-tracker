@@ -2,11 +2,11 @@ import { cloneDeep, isInteger, isObject, toPath } from "lodash";
 
 /**
  * 
- * @param obj state object to be updated.
- * @param key qualified paths of the attribute.
- * @param def default value when attribute not found.
- * @param p index of the attribute currently traversed.
- * @returns attribute value if found or default value passed as 'def'.
+ * @param obj - state object to be updated.
+ * @param key - qualified paths of the attribute.
+ * @param def - default value when attribute not found.
+ * @param p - index of the attribute currently traversed.
+ * @returns - attribute value if found or default value passed as 'def'.
  */
 export function GetAttribute(
   obj: any,
@@ -28,11 +28,11 @@ export function GetAttribute(
 
 /**
  * 
- * @param obj state object to be updated.
- * @param value mutation descriptor.
- * @param visited attributes which are already visited recursively.
- * @param response updated state object already updated recursively.
- * @returns updated state object.
+ * @param obj - state object to be updated.
+ * @param value - mutation descriptor.
+ * @param visited - attributes which are already visited recursively.
+ * @param response - updated state object already updated recursively.
+ * @returns - updated state object.
  */
 export function setAllAttributesMuted<T>(
   obj: any,
@@ -57,10 +57,10 @@ export function setAllAttributesMuted<T>(
 
 /**
  * 
- * @param obj state object to be updated.
- * @param value mutation descriptor.
- * @param paths qualified paths of the attributes.
- * @returns updated state object.
+ * @param obj - state object to be updated.
+ * @param value - mutation descriptor.
+ * @param paths - qualified paths of the attributes.
+ * @returns - updated state object.
  */
 export function setAttributeMutatedMultiple<T>(obj: any, value: T, ...paths: string[]): any {
   paths.forEach((path) => {
@@ -72,10 +72,10 @@ export function setAttributeMutatedMultiple<T>(obj: any, value: T, ...paths: str
 
 /**
  * 
- * @param obj state object to be updated.
- * @param value mutation descriptor.
- * @param path qualified path of the attribute.
- * @returns updated state object.
+ * @param obj - state object to be updated.
+ * @param value - mutation descriptor.
+ * @param path - qualified path of the attribute.
+ * @returns - updated state object.
  */
 export function setAttributeMutated<T>(obj: any, value: T, path: string): any {
   let res: any = cloneDeep(obj);
