@@ -4,9 +4,8 @@
 Mutation Tracker is born out of a need to track **dirty** state of properties within JavaScript objects.
 
 ### How?
-Mutation Tracker maintains a mirror object, created of the source object, for which we need to track attribute mutation.
-When there is a change in one of the attribute of the object, using the provided APIs we can mark the equivalent  attribute in
-the object maintained by Mutation Tracker.
+Mutation Tracker maintains a mirror object, optionally created using the target object, which we need to track for attribute mutations.
+Whenever there is a change in one of the attribute in the target object, we can track that change parallely in the mirror object maintained within Mutation Tracker, using easy to use function calls.
 
 ### Why?
 A major use case of Mutation Tracker library is to track the dirty state of HTML Form Fields.
@@ -49,7 +48,7 @@ console.log(JSON.stringify(tracker.state));
 
 ### Samples
 
-#### 1 - Initialization *with* Type
+#### 1 - Initialization for existing object
 
 ```javascript
 var tracker = MutationTracker(user, {});
@@ -57,7 +56,7 @@ console.log(JSON.stringify(tracker.state));
 // { name: { firstname: false, lastname: false }, address: false }
 ```
 
-#### 2 - Initialization *without* Type
+#### 2 - Initialization for new object
 
 ```javascript
 var tracker = MutationTracker({}, {});
@@ -65,7 +64,7 @@ console.log(JSON.stringify(tracker.state));
 // {}
 ```
 
-#### 3 - Set mutated to *true* for Type
+#### 3 - Set mutated to *true* for existing object
 
 ```javascript
 var tracker = MutationTracker(user, {});
@@ -74,7 +73,7 @@ console.log(JSON.stringify(tracker.state));
 // { name: { firstname: true, lastname: false }, address: false }
 ```
 
-#### 4 - Set mutated to *true* for without Type
+#### 4 - Set mutated to *true* for new object
 
 ```javascript
 var tracker = MutationTracker({}, {});
@@ -83,7 +82,7 @@ console.log(JSON.stringify(tracker.state));
 // { name: { firstname: true }
 ```
 
-#### 5 - Set mutated to true on initialization
+#### 5 - Set mutated to *true* at initialization
 
 ```javascript
 var tracker = MutationTracker(user, {
@@ -107,7 +106,7 @@ tracker.setMutatedByAttributeNames(true, [
 console.log(JSON.stringify(tracker.state));
 // { name: { firstname: true, lastname: true }, address: false }
 ```
-#### 7 - Set All mutations
+#### 7 - Set all mutations
 
 ```javascript
 var tracker = MutationTracker(user, {});
