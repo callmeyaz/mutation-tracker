@@ -1,7 +1,12 @@
 import { cloneDeep, isInteger, isObject, toPath } from "lodash";
 
 /**
- * Get mutation/descriptor on the Attribute
+ * 
+ * @param obj state object to be updated.
+ * @param key qualified paths of the attribute.
+ * @param def default value when attribute not found.
+ * @param p index of the attribute currently traversed.
+ * @returns attribute value if found or default value passed as 'def'.
  */
 export function GetAttribute(
   obj: any,
@@ -22,16 +27,21 @@ export function GetAttribute(
 }
 
 /**
- * Set new mutation/descriptor for the Attribute 
+ * 
+ * @param obj state object to be updated.
+ * @param value mutation descriptor.
+ * @param visited attributes which are already visited recursively.
+ * @param response updated state object already updated recursively.
+ * @returns updated state object.
  */
 export function setAllAttributesMuted<T>(
-  object: any,
+  obj: any,
   value: T,
   visited: any = new WeakMap(),
   response: any = {}
 ): any {
-  for (let k of Object.keys(object)) {
-    const val = object[k];
+  for (let k of Object.keys(obj)) {
+    const val = obj[k];
     if (isObject(val)) {
       if (!visited.get(val)) {
         visited.set(val, true);
@@ -46,7 +56,11 @@ export function setAllAttributesMuted<T>(
 }
 
 /**
- * Set mutation/descriptor on multiple Attributes at the same time
+ * 
+ * @param obj state object to be updated.
+ * @param value mutation descriptor.
+ * @param paths qualified paths of the attributes.
+ * @returns updated state object.
  */
 export function setAttributeMutatedMultiple<T>(obj: any, value: T, ...paths: string[]): any {
   paths.forEach((path) => {
@@ -57,7 +71,11 @@ export function setAttributeMutatedMultiple<T>(obj: any, value: T, ...paths: str
 }
 
 /**
- * Set mutation/descriptor on an Attribute
+ * 
+ * @param obj state object to be updated.
+ * @param value mutation descriptor.
+ * @param path qualified path of the attribute.
+ * @returns updated state object.
  */
 export function setAttributeMutated<T>(obj: any, value: T, path: string): any {
   let res: any = cloneDeep(obj);

@@ -24,10 +24,10 @@ The JavaScript object below represents the state of a HTML form above:
 ```javascript
 var user = {
 	name: {
-		firstname: "john",
-		lastname: "jane"
+		firstname: "John",
+		lastname: "Doe"
 	},
-	address: "123 Happy Street"
+	address: "123 Main Street"
 }
 ```
 To track changes in the object above, we can mark those property changes as follows.

@@ -3,8 +3,8 @@ import { MutationTracker } from "./mutation-tracker";
 
 var user = {
 	name: {
-		firstname: "john",
-		lastname: "jane"
+		firstname: "John",
+		lastname: "Doe"
 	},
 	address: "123 Happy Street"
 }

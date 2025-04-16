@@ -6,8 +6,8 @@ import {
 } from "./mutation";
 
 /*
-* Type of Attribute to track mutation/descriptor
-* Represents a node of a tree or a leaf of type 'T'
+* Type of attribute to track mutation descriptor.
+* Represents an attribute of the object tree.
 */
 
 export type MutatedAttribute<Values, T> = {
@@ -32,7 +32,7 @@ export interface MutatedState<Values, T> {
  * 
  * @param state Current state object.
  * @param mutation Mutation to be merged on state object. 
- * @returns Newly mutated State object.
+ * @returns Updated state object.
  */
 export function setMutatedByAttribute<Values, T>(
     state: MutatedState<Values, T>,
@@ -47,7 +47,7 @@ export function setMutatedByAttribute<Values, T>(
  * @param state Current state object.
  * @param attribute Attribute name to be updated with mutation. 
  * @param value Mutation to be merged on state object. 
- * @returns Newly mutated State object.
+ * @returns Updated state object.
  */
 export function setMutatedByAttributePath<Values, T>(
     state: MutatedState<Values, T>,
@@ -65,7 +65,7 @@ export function setMutatedByAttributePath<Values, T>(
  * @param state Current state object.
  * @param value Mutation to be merged on state object.
  * @param attributePaths List of attribute names to be updated with mutation. 
- * @returns Newly mutated State object.
+ * @returns Updated state object.
  */
 export function setMutatedByAttributePaths<Values, T>(
     state: MutatedState<Values, T>,
@@ -78,6 +78,12 @@ export function setMutatedByAttributePaths<Values, T>(
     return ret;
 }
 
+/**
+ * 
+ * @param obj target object used to create state object.
+ * @param value default value of mutation descriptor.
+ * @returns New state object.
+ */
 export function buildMutationFromObject<Values, T>(
     obj: Values,
     value: T)
@@ -90,7 +96,7 @@ export function buildMutationFromObject<Values, T>(
  * 
  * @param state Current state object.
  * @param mutation Mutation to be merged on state object.
- * @returns Newly mutated State object.
+ * @returns Updated state object.
  */
 export function setMutatedAllAttributes<Values, T>(
     state: MutatedState<Values, T>,
@@ -104,7 +110,7 @@ export function setMutatedAllAttributes<Values, T>(
  * 
  * @param state Current state object.
  * @param mutation Mutation to be replaced on state object.
- * @returns  Newly mutated State object.
+ * @returns  Updated state object.
  */
 export function ResetMutatedState<Values, T>(
     state: MutatedState<Values, T>,
@@ -117,7 +123,7 @@ export function ResetMutatedState<Values, T>(
 /**
  * 
  * @param state Current state object.
- * @returns  Newly mutated State object.
+ * @returns  Updated state object.
  */
 export function ClearMutatedState<Values, T>(
     state: MutatedState<Values, T>,

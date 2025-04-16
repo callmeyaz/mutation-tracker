@@ -1,17 +1,35 @@
 /**
- * Get mutation/descriptor on the Attribute
+ *
+ * @param obj state object to be updated.
+ * @param key qualified paths of the attribute.
+ * @param def default value when attribute not found.
+ * @param p index of the attribute currently traversed.
+ * @returns attribute value if found or default value passed as 'def'.
  */
 export declare function GetAttribute(obj: any, key: string | string[], def?: any, p?: number): any;
 /**
- * Set new mutation/descriptor for the Attribute
+ *
+ * @param obj state object to be updated.
+ * @param value mutation descriptor.
+ * @param visited attributes which are already visited recursively.
+ * @param response updated state object already updated recursively.
+ * @returns updated state object.
  */
-export declare function setAllAttributesMuted<T>(object: any, value: T, visited?: any, response?: any): any;
+export declare function setAllAttributesMuted<T>(obj: any, value: T, visited?: any, response?: any): any;
 /**
- * Set mutation/descriptor on multiple Attributes at the same time
+ *
+ * @param obj state object to be updated.
+ * @param value mutation descriptor.
+ * @param paths qualified paths of the attributes.
+ * @returns updated state object.
  */
 export declare function setAttributeMutatedMultiple<T>(obj: any, value: T, ...paths: string[]): any;
 /**
- * Set mutation/descriptor on an Attribute
+ *
+ * @param obj state object to be updated.
+ * @param value mutation descriptor.
+ * @param path qualified path of the attribute.
+ * @returns updated state object.
  */
 export declare function setAttributeMutated<T>(obj: any, value: T, path: string): any;
 //# sourceMappingURL=mutation.d.ts.map
