@@ -72,6 +72,34 @@ export function setAttributeMutatedMultiple<T>(obj: any, value: T, ...paths: str
 
 /**
  * 
+ * @param obj - state object to be searched.
+ * @param path - qualified paths of the attribute.
+ * @returns - value of mutation in state object.
+ */
+export function getAttributeMutation<T>(obj: any, path: string) : T {
+  let res: any = cloneDeep(obj);
+  let resVal: any = res;
+  let i = 0;
+  let pathArray = toPath(path);
+
+  for (; i < pathArray.length - 1; i++) {
+    const currentPath: string = pathArray[i];
+    let currentObj: any = GetAttribute(obj, pathArray.slice(0, i + 1));
+
+    if (currentObj && (isObject(currentObj) || Array.isArray(currentObj))) {
+      resVal = resVal[currentPath] = cloneDeep(currentObj);
+    } else {
+      const nextPath: string = pathArray[i + 1];
+      resVal = resVal[currentPath] =
+        isInteger(nextPath) && Number(nextPath) >= 0 ? [] : {};
+    }
+  }
+
+  return resVal[pathArray[i]];
+}
+
+/**
+ * 
  * @param obj - state object to be updated.
  * @param value - mutation descriptor.
  * @param path - qualified path of the attribute.

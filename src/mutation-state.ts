@@ -2,7 +2,8 @@ import { cloneDeep } from "lodash";
 import {
     setAttributeMutated,
     setAttributeMutatedMultiple,
-    setAllAttributesMuted
+    setAllAttributesMuted,
+    getAttributeMutation
 } from "./mutation";
 
 /*
@@ -39,6 +40,20 @@ export function setMutatedByAttribute<Values, T>(
     value: MutatedAttribute<Values, T>)
     : MutatedState<Values, T> {
     var ret = { ...state, mutation: value };
+    return ret;
+}
+
+/**
+ * 
+ * @param state - Current state object.
+ * @param attributePath - Attribute name to be updated with mutation. 
+ * @returns Mutation for the attribute.
+ */
+export function getMutationByAttributePath<Values, T>(
+    state: MutatedState<Values, T>,
+    attributePath: string)
+    : T {
+    var ret = getAttributeMutation<T>(state.mutation, attributePath);
     return ret;
 }
 

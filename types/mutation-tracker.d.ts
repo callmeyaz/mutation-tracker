@@ -13,6 +13,7 @@ declare function track<Values extends KeyValuePair = KeyValuePair>(target: Value
     clear: () => void;
     reset: () => void;
     setAll: (value: boolean) => void;
+    getMutationByAttributeName: (attributeName: string) => boolean;
     setMutatedByAttributeName: (value: boolean, attributeName: string) => void;
     setMutatedByAttributeNames: (value: boolean, attributeNames: string[]) => void;
 };

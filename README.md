@@ -1,4 +1,4 @@
-# mutation-tracker 1.0.0
+# mutation-tracker 1.0.9
 
 ### What?
 Mutation Tracker is born out of a need to track and manage **dirty** state of properties within JavaScript objects.

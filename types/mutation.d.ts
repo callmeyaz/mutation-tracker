@@ -26,6 +26,13 @@ export declare function setAllAttributesMuted<T>(obj: any, value: T, visited?: a
 export declare function setAttributeMutatedMultiple<T>(obj: any, value: T, ...paths: string[]): any;
 /**
  *
+ * @param obj - state object to be searched.
+ * @param path - qualified paths of the attribute.
+ * @returns - value of mutation in state object.
+ */
+export declare function getAttributeMutation<T>(obj: any, path: string): T;
+/**
+ *
  * @param obj - state object to be updated.
  * @param value - mutation descriptor.
  * @param path - qualified path of the attribute.

@@ -20,6 +20,13 @@ export declare function setMutatedByAttribute<Values, T>(state: MutatedState<Val
 /**
  *
  * @param state - Current state object.
+ * @param attributePath - Attribute name to be updated with mutation.
+ * @returns Mutation for the attribute.
+ */
+export declare function getMutationByAttributePath<Values, T>(state: MutatedState<Values, T>, attributePath: string): T;
+/**
+ *
+ * @param state - Current state object.
  * @param attribute - Attribute name to be updated with mutation.
  * @param value - Mutation to be merged on state object.
  * @returns - Updated state object.
