@@ -106,7 +106,22 @@ tracker.setMutatedByAttributeNames(true, [
 console.log(JSON.stringify(tracker.state));
 // { name: { firstname: true, lastname: true }, address: false }
 ```
-#### 7 - Set all mutations
+
+#### 7 - get mutation value of attribute
+
+```javascript
+var tracker = MutationTracker(user, {});
+tracker.setMutatedByAttributeNames(true, [
+	"name.firstname",
+	"name.lastname"
+]);
+console.log("firstname: ", tracker.getMutationByAttributeName("name.firstname"));
+console.log("address: ", tracker.getMutationByAttributeName("address"));
+// firstname: true
+// address: false
+```
+
+#### 8 - Set all mutations
 
 ```javascript
 var tracker = MutationTracker(user, {});
@@ -116,7 +131,7 @@ console.log(JSON.stringify(tracker.state));
 ```
 
 
-#### 8 - Reset mutations
+#### 9 - Reset mutations
 
 ```javascript
 var tracker = MutationTracker(user, {
@@ -134,7 +149,7 @@ console.log(JSON.stringify(tracker.state));
 // { name: { firstname: true, lastname: false }, address: false }
 ```
 
-#### 9 - Clear mutations
+#### 10 - Clear mutations
 
 ```javascript
 var tracker = MutationTracker(user, {
@@ -161,6 +176,7 @@ console.log(JSON.stringify(tracker.state));
 |  MutationTracker() | constructor   |
 |  setMutatedByAttributeName() | sets mutation flag for a qualified attribute name  |
 | setMutatedByAttributeNames()  |  sets mutation flag for multiple qualified attribute names  |
+| getMutationByAttributeName()  |  gets mutation flag for a qualified attribute name  |
 | reset()  |  Sets mutation tracking back to the initialized state such as reapplying initial mutation settings |
 | setAll()  |  Sets mutation for tracked attributes to *true* |
 | clear()  |  For tracking Without *Type*, removes all mutation tracking. For  tracking with a *Type*, sets all mutations to *false* |
