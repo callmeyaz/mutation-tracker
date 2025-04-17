@@ -55,7 +55,7 @@ function track<Values extends KeyValuePair = KeyValuePair>(target: Values, confi
         _currentState.mutation = ret.mutation;
     }
 
-    function getMutationByAttributeName(attributeName: string) : boolean {
+    function getMutatedByAttributeName(attributeName: string) : boolean {
         var ret = getMutationByAttributePath(_currentState, attributeName);
         return ret;        
     }
@@ -66,7 +66,7 @@ function track<Values extends KeyValuePair = KeyValuePair>(target: Values, confi
         clear: clearState,
         reset: resetState,
         setAll: setAllState,
-        getMutationByAttributeName: getMutationByAttributeName,
+        getMutatedByAttributeName: getMutatedByAttributeName,
         setMutatedByAttributeName: setMutatedByAttributeName,
         setMutatedByAttributeNames: setMutatedByAttributeNames,
     }

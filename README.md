@@ -115,8 +115,8 @@ tracker.setMutatedByAttributeNames(true, [
 	"name.firstname",
 	"name.lastname"
 ]);
-console.log("firstname: ", tracker.getMutationByAttributeName("name.firstname"));
-console.log("address: ", tracker.getMutationByAttributeName("address"));
+console.log("firstname: ", tracker.getMutatedByAttributeName("name.firstname"));
+console.log("address: ", tracker.getMutatedByAttributeName("address"));
 // firstname: true
 // address: false
 ```
@@ -176,7 +176,7 @@ console.log(JSON.stringify(tracker.state));
 |  MutationTracker() | constructor   |
 |  setMutatedByAttributeName() | sets mutation flag for a qualified attribute name  |
 | setMutatedByAttributeNames()  |  sets mutation flag for multiple qualified attribute names  |
-| getMutationByAttributeName()  |  gets mutation flag for a qualified attribute name  |
+| getMutatedByAttributeName()  |  gets mutation flag for a qualified attribute name  |
 | reset()  |  Sets mutation tracking back to the initialized state such as reapplying initial mutation settings |
 | setAll()  |  Sets mutation for tracked attributes to *true* |
 | clear()  |  For tracking Without *Type*, removes all mutation tracking. For  tracking with a *Type*, sets all mutations to *false* |

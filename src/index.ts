@@ -20,9 +20,9 @@ console.log(JSON.stringify(tracker.state));
 
 tracker.setMutatedByAttributeName(true, "name.lastname");
 
-console.log("firstname: ", tracker.getMutationByAttributeName("name.firstname"));
-console.log("lastname: ", tracker.getMutationByAttributeName("name.lastname"));
-console.log("address: ", tracker.getMutationByAttributeName("address"));
+console.log("firstname: ", tracker.getMutatedByAttributeName("name.firstname"));
+console.log("lastname: ", tracker.getMutatedByAttributeName("name.lastname"));
+console.log("address: ", tracker.getMutatedByAttributeName("address"));
 
 console.log(JSON.stringify(tracker.state));
 // { name: { firstname: true, lastname: true }, address: false }
