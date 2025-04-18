@@ -60,11 +60,11 @@ export declare function setMutatedAllAttributes<Values, T>(state: MutatedState<V
  * @param mutation - Mutation to be replaced on state object.
  * @returns - Updated state object.
  */
-export declare function ResetMutatedState<Values, T>(state: MutatedState<Values, T>, mutation: MutatedAttribute<Values, T>): MutatedState<Values, T>;
+export declare function resetMutatedState<Values, T>(state: MutatedState<Values, T>, mutation: MutatedAttribute<Values, T>): MutatedState<Values, T>;
 /**
  *
  * @param state - Current state object.
  * @returns - Updated state object.
  */
-export declare function ClearMutatedState<Values, T>(state: MutatedState<Values, T>, initialMutation: MutatedAttribute<Values, T>): MutatedState<Values, T>;
+export declare function clearMutatedState<Values, T>(state: MutatedState<Values, T>, mutationTemplate: MutatedAttribute<Values, T>): MutatedState<Values, T>;
 //# sourceMappingURL=mutation-state.d.ts.map

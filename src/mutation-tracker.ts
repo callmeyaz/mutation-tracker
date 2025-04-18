@@ -1,6 +1,6 @@
 import {
-    buildMutationFromObject,
-    ClearMutatedState,
+    buildMutationFromObject as buildMutationTemplateFromObject,
+    clearMutatedState,
     getMutationByAttributePath,
     KeyValuePair,
     setMutatedAllAttributes,
@@ -19,8 +19,8 @@ export interface MutationConfig {
  * @returns - Returns mutation tracker instance.
  */
 function track<Values extends KeyValuePair = KeyValuePair>(target: Values, config: MutationConfig) {
-    const _initialMutation = buildMutationFromObject(target, false);
-    const _currentState = { mutation: _initialMutation };
+    const _mutationTemplate = buildMutationTemplateFromObject(target, false);
+    const _currentState = { mutation: _mutationTemplate };
     const _initiallyMutated = config?.initiallyMutatedAttributes || [];
 
     clearState();
@@ -30,7 +30,7 @@ function track<Values extends KeyValuePair = KeyValuePair>(target: Values, confi
     }
 
     function clearState() {
-        var ret = ClearMutatedState(_currentState, _initialMutation);
+        var ret = clearMutatedState(_currentState, _mutationTemplate);
         _currentState.mutation = ret.mutation;
     }
 

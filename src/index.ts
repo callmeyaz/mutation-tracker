@@ -27,7 +27,12 @@ console.log("address: ", tracker.getMutatedByAttributeName("address"));
 console.log(JSON.stringify(tracker.state));
 // { name: { firstname: true, lastname: true }, address: false }
 
-tracker.clear();
+tracker.reset();
+tracker.setAll(true);
+tracker.setAll(true);
+tracker.setAll(true);
+tracker.setAll(true);
 
 console.log(JSON.stringify(tracker.state));
+
 // { name: { firstname: false, lastname: false }, address: false }

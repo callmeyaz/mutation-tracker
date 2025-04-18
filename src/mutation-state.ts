@@ -117,7 +117,7 @@ export function setMutatedAllAttributes<Values, T>(
     state: MutatedState<Values, T>,
     value: T)
     : MutatedState<Values, T> {
-    var ret = { mutation: setAllAttributesMuted(state, value) };
+    var ret = { mutation: setAllAttributesMuted(state.mutation, value) };
     return ret
 }
 
@@ -127,7 +127,7 @@ export function setMutatedAllAttributes<Values, T>(
  * @param mutation - Mutation to be replaced on state object.
  * @returns - Updated state object.
  */
-export function ResetMutatedState<Values, T>(
+export function resetMutatedState<Values, T>(
     state: MutatedState<Values, T>,
     mutation: MutatedAttribute<Values, T>)
     : MutatedState<Values, T> {
@@ -140,10 +140,10 @@ export function ResetMutatedState<Values, T>(
  * @param state - Current state object.
  * @returns - Updated state object.
  */
-export function ClearMutatedState<Values, T>(
+export function clearMutatedState<Values, T>(
     state: MutatedState<Values, T>,
-    initialMutation: MutatedAttribute<Values, T>)
+    mutationTemplate: MutatedAttribute<Values, T>)
     : MutatedState<Values, T> {
-    state.mutation = cloneDeep(initialMutation);
+    state.mutation = cloneDeep(mutationTemplate);
     return state;
 }
