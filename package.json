@@ -1,9 +1,9 @@
 {
   "name": "mutation-tracker",
   "description": "Library that provides means to tracks mutation in JSON objects.",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "license": "MIT",
-  "main": "./src.main.ts",
+  "main": "./src/main.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/callmeyaz/mutation-tracker.git"
