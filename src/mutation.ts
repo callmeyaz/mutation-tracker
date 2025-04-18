@@ -8,7 +8,7 @@ import { cloneDeep, isInteger, isObject, toPath } from "lodash";
  * @param p - index of the attribute currently traversed.
  * @returns - attribute value if found or default value passed as 'def'.
  */
-export function GetAttribute(
+export function getAttribute(
   obj: any,
   key: string | string[],
   def?: any,
@@ -84,7 +84,7 @@ export function getAttributeMutation<T>(obj: any, path: string) : T {
 
   for (; i < pathArray.length - 1; i++) {
     const currentPath: string = pathArray[i];
-    let currentObj: any = GetAttribute(obj, pathArray.slice(0, i + 1));
+    let currentObj: any = getAttribute(obj, pathArray.slice(0, i + 1));
 
     if (currentObj && (isObject(currentObj) || Array.isArray(currentObj))) {
       resVal = resVal[currentPath] = cloneDeep(currentObj);
@@ -113,7 +113,7 @@ export function setAttributeMutated<T>(obj: any, value: T, path: string): any {
 
   for (; i < pathArray.length - 1; i++) {
     const currentPath: string = pathArray[i];
-    let currentObj: any = GetAttribute(obj, pathArray.slice(0, i + 1));
+    let currentObj: any = getAttribute(obj, pathArray.slice(0, i + 1));
 
     if (currentObj && (isObject(currentObj) || Array.isArray(currentObj))) {
       resVal = resVal[currentPath] = cloneDeep(currentObj);

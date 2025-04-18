@@ -6,7 +6,7 @@
  * @param p - index of the attribute currently traversed.
  * @returns - attribute value if found or default value passed as 'def'.
  */
-export declare function GetAttribute(obj: any, key: string | string[], def?: any, p?: number): any;
+export declare function getAttribute(obj: any, key: string | string[], def?: any, p?: number): any;
 /**
  *
  * @param obj - state object to be updated.
