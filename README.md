@@ -1,4 +1,4 @@
-# mutation-tracker 1.0.16
+# mutation-tracker 1.0.17
 
 ### Why?
 Mutation Tracker is born out of a need to track and manage **dirty** state of properties/attributes
@@ -183,7 +183,7 @@ console.log(JSON.stringify(tracker.state));
 // { name: { firstname: false, lastname: false }, address: false }
 ```
 
-#### 11 - Using value type boolean for mutaiton tracking
+#### 11 - Using value type **boolean** for mutaiton tracking
 
 ```javascript
 var tracker = MutationTracker<boolean>(user, { defaultValue: false });
@@ -191,6 +191,8 @@ tracker.setMutatedByAttributeName(true, "name.firstname");
 console.log(JSON.stringify(tracker.state));
 // { name: { firstname: true, lastname: false }, address: false }
 ```
+
+#### 12 - Using value type **number** for mutaiton tracking
 
 ```javascript
 var tracker = MutationTracker<number>(user, { defaultValue: 0 });
