@@ -20,7 +20,7 @@ var tracker = MutationTracker<number>(user, {
 });
 
 console.log(JSON.stringify(tracker.state));
-// { name: { firstname: true, lastname: false }, address: false }
+// { name: { firstname: 1, lastname: 0 }, address: 0 }
 
 tracker.setMutatedByAttributeName(1, "name.lastname");
 
@@ -29,7 +29,7 @@ console.log("lastname: ", tracker.getMutatedByAttributeName("name.lastname"));
 console.log("address: ", tracker.getMutatedByAttributeName("address"));
 
 console.log(JSON.stringify(tracker.state));
-// { name: { firstname: true, lastname: true }, address: false }
+// { name: { firstname: 1, lastname: 1 }, address: 0 }
 
 tracker.reset();
 tracker.setAll(1);
@@ -38,6 +38,6 @@ tracker.setAll(100);
 tracker.setAll(1000);
 
 console.log(JSON.stringify(tracker.state));
-// { name: { firstname: false, lastname: false }, address: false }
+// { name: { firstname: 1000, lastname: 1000 }, address: 1000 }
 
 
