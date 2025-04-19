@@ -1,21 +1,30 @@
-import { KeyValuePair } from "./mutation-state";
-export interface MutationConfig {
-    initiallyMutatedAttributes?: string[];
-}
+import { KeyValuePair, MutatedAttribute } from "./mutation-state";
+export type InitialMutation<T> = {
+    mutatedAttributes?: string[];
+    mutatedValue: T;
+};
+export type MutationConfig<T> = {
+    initialMutation?: InitialMutation<T>;
+    defaultValue: T;
+};
+export type MutationState<Values, T> = {
+    mutation: MutatedAttribute<Values, T>;
+};
 /**
  *
  * @param config - Configuration object.
  * @returns - Returns mutation tracker instance.
  */
-declare function track<Values extends KeyValuePair = KeyValuePair>(target: Values, config: MutationConfig): {
-    readonly initiallyMutatedAttributes: string[];
-    readonly state: import("./mutation-state").MutatedAttribute<Values, boolean>;
+declare function track<T, Values extends KeyValuePair = KeyValuePair>(target: Values, config: MutationConfig<T>): {
+    readonly initiallyMutatedAttributes: string[] | undefined;
+    readonly initiallyMutatedValue: T | undefined;
+    readonly state: MutatedAttribute<Values, T>;
     clear: () => void;
     reset: () => void;
-    setAll: (value: boolean) => void;
-    getMutatedByAttributeName: (attributeName: string) => boolean;
-    setMutatedByAttributeName: (value: boolean, attributeName: string) => void;
-    setMutatedByAttributeNames: (value: boolean, attributeNames: string[]) => void;
+    setAll: (value: T) => void;
+    getMutatedByAttributeName: (attributeName: string) => T;
+    setMutatedByAttributeName: (value: T, attributeName: string) => void;
+    setMutatedByAttributeNames: (value: T, attributeNames: string[]) => void;
 };
 export declare const MutationTracker: typeof track;
 export {};
