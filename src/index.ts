@@ -9,35 +9,40 @@ var user = {
 	address: "123 Happy Street"
 }
 
-var tracker = MutationTracker<number>(user, {
+type Validation = {
+	dirty: boolean,
+	touched: boolean
+}
+
+var tracker = MutationTracker<Validation>(user, {
 	initialMutation: {
 		mutatedAttributes: [
 			"name.firstname"
 		],
-		mutatedValue: 1
+		mutatedValue: { dirty: true, touched: false }
 	},
-	defaultValue: 0
+	defaultValue: { dirty: false, touched: false }
 });
 
 console.log(JSON.stringify(tracker.state));
-// { name: { firstname: 1, lastname: 0 }, address: 0 }
+// { name: { firstname: { dirty: true, touched: false }, lastname: { dirty: false, touched: false } }, address: { dirty: false, touched: false }}
 
-tracker.setMutatedByAttributeName(1, "name.lastname");
+tracker.setMutatedByAttributeName({ dirty: true, touched: true }, "name.lastname");
 
 console.log("firstname: ", tracker.getMutatedByAttributeName("name.firstname"));
 console.log("lastname: ", tracker.getMutatedByAttributeName("name.lastname"));
 console.log("address: ", tracker.getMutatedByAttributeName("address"));
 
 console.log(JSON.stringify(tracker.state));
-// { name: { firstname: 1, lastname: 1 }, address: 0 }
+// { name: { firstname: { dirty: true, touched: false }, lastname: { dirty: true, touched: true } }, address: { dirty: false, touched: false }}
 
 tracker.reset();
-tracker.setAll(1);
-tracker.setAll(10);
-tracker.setAll(100);
-tracker.setAll(1000);
 
 console.log(JSON.stringify(tracker.state));
-// { name: { firstname: 1000, lastname: 1000 }, address: 1000 }
+// { name: { firstname: { dirty: true, touched: false }, lastname: { dirty: false, touched: false } }, address: { dirty: false, touched: false }}
 
+tracker.clear();
+
+console.log(JSON.stringify(tracker.state));
+// { name: { firstname: { dirty: false, touched: false }, lastname: { dirty: false, touched: false } }, address: { dirty: false, touched: false }}
 
