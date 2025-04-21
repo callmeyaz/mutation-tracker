@@ -20,8 +20,8 @@ export type MutationConfig<T> = {
     defaultValue: T;
 }
 
-export type MutationState<Values, T> = {
-    mutation: MutatedAttribute<Values, T>
+export type MutationState<DType, T> = {
+    mutation: MutatedAttribute<DType, T>
 }
 
 /**
@@ -29,9 +29,9 @@ export type MutationState<Values, T> = {
  * @param config - Configuration object.
  * @returns - Returns mutation tracker instance.
  */
-function track<T, Values extends KeyValuePair = KeyValuePair>(target: Values, config: MutationConfig<T>) {
+function track<T, DType extends KeyValuePair>(target: DType, config: MutationConfig<T>) {
     const _mutationTemplate = buildMutationTemplateFromObject(target, config.defaultValue);
-    const _currentState: MutationState<Values, T> = { mutation: _mutationTemplate };
+    const _currentState: MutationState<DType, T> = { mutation: _mutationTemplate };
     const _initiallyMutated = config?.initialMutation;
 
     resetState();

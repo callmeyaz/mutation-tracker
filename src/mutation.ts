@@ -2,141 +2,141 @@ import { cloneDeep, isInteger, isObject, toPath } from "lodash";
 
 /**
  * 
- * @param obj - state object to be updated.
+ * @param model - state object to be updated.
  * @param key - qualified paths of the attribute.
- * @param def - default value when attribute not found.
- * @param p - index of the attribute currently traversed.
+ * @param defaultValue - default value when attribute not found.
+ * @param index - index of the attribute currently traversed.
  * @returns - attribute value if found or default value passed as 'def'.
  */
 export function getAttribute(
-  obj: any,
+  model: any,
   key: string | string[],
-  def?: any,
-  p: number = 0
+  defaultValue?: any,
+  index: number = 0
 ) {
   const path = toPath(key);
-  while (obj && p < path.length) {
-    obj = obj[path[p++]];
+  while (model && index < path.length) {
+    model = model[path[index++]];
   }
 
-  if (p !== path.length && !obj) {
-    return def;
+  if (index !== path.length && !model) {
+    return defaultValue;
   }
 
-  return obj === undefined ? def : obj;
+  return model === undefined ? defaultValue : model;
 }
 
 /**
  * 
- * @param obj - state object to be updated.
+ * @param model - state object to be updated.
  * @param value - mutation descriptor.
- * @param visited - attributes which are already visited recursively.
- * @param response - updated state object already updated recursively.
+ * @param processed - attributes which are already visited recursively.
+ * @param result - updated state object already updated recursively.
  * @returns - updated state object.
  */
 export function setAllAttributesMuted<T>(
-  obj: any,
+  model: any,
   value: T,
-  visited: any = new WeakMap(),
-  response: any = {}
+  processed: any = new WeakMap(),
+  result: any = {}
 ): any {
-  for (let k of Object.keys(obj)) {
-    const val = obj[k];
+  for (let k of Object.keys(model)) {
+    const val = model[k];
     if (isObject(val)) {
-      if (!visited.get(val)) {
-        visited.set(val, true);
-        response[k] = Array.isArray(val) ? [] : {};
-        setAllAttributesMuted(val, value, visited, response[k]);
+      if (!processed.get(val)) {
+        processed.set(val, true);
+        result[k] = Array.isArray(val) ? [] : {};
+        setAllAttributesMuted(val, value, processed, result[k]);
       }
     } else {
-      response[k] = value;
+      result[k] = value;
     }
   }
-  return response;
+  return result;
 }
 
 /**
  * 
- * @param obj - state object to be updated.
+ * @param model - state object to be updated.
  * @param value - mutation descriptor.
  * @param paths - qualified paths of the attributes.
  * @returns - updated state object.
  */
-export function setAttributeMutatedMultiple<T>(obj: any, value: T, ...paths: string[]): any {
+export function setAttributeMutatedMultiple<T>(model: any, value: T, ...paths: string[]): any {
   paths.forEach((path) => {
-    obj = setAttributeMutated(obj, value, path);
+    model = setAttributeMutated(model, value, path);
   });
 
-  return obj;
+  return model;
 }
 
 /**
  * 
- * @param obj - state object to be searched.
+ * @param model - state object to be searched.
  * @param path - qualified paths of the attribute.
  * @returns - value of mutation in state object.
  */
-export function getAttributeMutation<T>(obj: any, path: string) : T {
-  let res: any = cloneDeep(obj);
-  let resVal: any = res;
-  let i = 0;
-  let pathArray = toPath(path);
+export function getAttributeMutation<T>(model: any, path: string) : T {
+  let copy: any = cloneDeep(model);
+  let currentNode: any = copy;
+  let index = 0;
+  let pathList = toPath(path);
 
-  for (; i < pathArray.length - 1; i++) {
-    const currentPath: string = pathArray[i];
-    let currentObj: any = getAttribute(obj, pathArray.slice(0, i + 1));
+  for (; index < pathList.length - 1; index++) {
+    const currentPath: string = pathList[index];
+    let currentObj: any = getAttribute(model, pathList.slice(0, index + 1));
 
     if (currentObj && (isObject(currentObj) || Array.isArray(currentObj))) {
-      resVal = resVal[currentPath] = cloneDeep(currentObj);
+      currentNode = currentNode[currentPath] = cloneDeep(currentObj);
     } else {
-      const nextPath: string = pathArray[i + 1];
-      resVal = resVal[currentPath] =
+      const nextPath: string = pathList[index + 1];
+      currentNode = currentNode[currentPath] =
         isInteger(nextPath) && Number(nextPath) >= 0 ? [] : {};
     }
   }
 
-  return resVal[pathArray[i]];
+  return currentNode[pathList[index]];
 }
 
 /**
  * 
- * @param obj - state object to be updated.
+ * @param model - state object to be updated.
  * @param value - mutation descriptor.
  * @param path - qualified path of the attribute.
  * @returns - updated state object.
  */
-export function setAttributeMutated<T>(obj: any, value: T, path: string): any {
-  let res: any = cloneDeep(obj);
-  let resVal: any = res;
-  let i = 0;
-  let pathArray = toPath(path);
+export function setAttributeMutated<T>(model: any, value: T, path: string): any {
+  let copy: any = cloneDeep(model);
+  let currentNode: any = copy;
+  let index = 0;
+  let pathList = toPath(path);
 
-  for (; i < pathArray.length - 1; i++) {
-    const currentPath: string = pathArray[i];
-    let currentObj: any = getAttribute(obj, pathArray.slice(0, i + 1));
+  for (; index < pathList.length - 1; index++) {
+    const currentPath: string = pathList[index];
+    let currentObj: any = getAttribute(model, pathList.slice(0, index + 1));
 
     if (currentObj && (isObject(currentObj) || Array.isArray(currentObj))) {
-      resVal = resVal[currentPath] = cloneDeep(currentObj);
+      currentNode = currentNode[currentPath] = cloneDeep(currentObj);
     } else {
-      const nextPath: string = pathArray[i + 1];
-      resVal = resVal[currentPath] =
+      const nextPath: string = pathList[index + 1];
+      currentNode = currentNode[currentPath] =
         isInteger(nextPath) && Number(nextPath) >= 0 ? [] : {};
     }
   }
 
-  if ((i === 0 ? obj : resVal)[pathArray[i]] === value) {
-    return obj;
+  if ((index === 0 ? model : currentNode)[pathList[index]] === value) {
+    return model;
   }
 
   if (value === undefined) {
-    delete resVal[pathArray[i]];
+    delete currentNode[pathList[index]];
   } else {
-    resVal[pathArray[i]] = value;
+    currentNode[pathList[index]] = value;
   }
 
-  if (i === 0 && value === undefined) {
-    delete res[pathArray[i]];
+  if (index === 0 && value === undefined) {
+    delete copy[pathList[index]];
   }
 
-  return res;
+  return copy;
 }

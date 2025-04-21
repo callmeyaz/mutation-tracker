@@ -7,18 +7,18 @@ export type MutationConfig<T> = {
     initialMutation?: InitialMutation<T>;
     defaultValue: T;
 };
-export type MutationState<Values, T> = {
-    mutation: MutatedAttribute<Values, T>;
+export type MutationState<DType, T> = {
+    mutation: MutatedAttribute<DType, T>;
 };
 /**
  *
  * @param config - Configuration object.
  * @returns - Returns mutation tracker instance.
  */
-declare function track<T, Values extends KeyValuePair = KeyValuePair>(target: Values, config: MutationConfig<T>): {
+declare function track<T, DType extends KeyValuePair>(target: DType, config: MutationConfig<T>): {
     readonly initiallyMutatedAttributes: string[] | undefined;
     readonly initiallyMutatedValue: T | undefined;
-    readonly state: MutatedAttribute<Values, T>;
+    readonly state: MutatedAttribute<DType, T>;
     clear: () => void;
     reset: () => void;
     setAll: (value: T) => void;
