@@ -95,15 +95,15 @@ export function setMutatedByAttributePaths<DType, T>(
 
 /**
  * 
- * @param obj - target object used to create state object.
+ * @param model - target object used to create state object.
  * @param value - default value of mutation descriptor.
  * @returns - New state object.
  */
-export function buildMutationFromObject<DType, T>(
-    obj: DType,
+export function buildMutationFromObject<DType extends { [field: string]: any }, T>(
+    model: DType,
     value: T)
     : MutatedAttribute<DType, T> {
-    var ret = setAllAttributesMuted(obj, value);
+    var ret = setAllAttributesMuted(model, value);
     return ret
 }
 

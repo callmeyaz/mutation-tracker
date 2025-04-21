@@ -1,7 +1,7 @@
 {
   "name": "mutation-tracker",
   "description": "Library that provides means to tracks mutation in JSON objects.",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "license": "MIT",
   "main": "./src/main.ts",
   "repository": {

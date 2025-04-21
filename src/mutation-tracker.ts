@@ -29,7 +29,7 @@ export type MutationState<DType, T> = {
  * @param config - Configuration object.
  * @returns - Returns mutation tracker instance.
  */
-function track<T, DType extends KeyValuePair>(target: DType, config: MutationConfig<T>) {
+function track<T, DType extends { [field: string]: any }>(target: DType, config: MutationConfig<T>) {
     const _mutationTemplate = buildMutationTemplateFromObject(target, config.defaultValue);
     const _currentState: MutationState<DType, T> = { mutation: _mutationTemplate };
     const _initiallyMutated = config?.initialMutation;

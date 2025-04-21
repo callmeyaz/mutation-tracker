@@ -34,8 +34,8 @@ export function getAttribute(
  * @param result - updated state object already updated recursively.
  * @returns - updated state object.
  */
-export function setAllAttributesMuted<T>(
-  model: any,
+export function setAllAttributesMuted<DType extends { [field: string]: any }, T>(
+  model: DType,
   value: T,
   processed: any = new WeakMap(),
   result: any = {}

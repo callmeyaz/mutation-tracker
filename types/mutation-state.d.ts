@@ -42,11 +42,13 @@ export declare function setMutatedByAttributePath<DType, T>(state: MutatedState<
 export declare function setMutatedByAttributePaths<DType, T>(state: MutatedState<DType, T>, value: T, attributePaths: string[]): MutatedState<DType, T>;
 /**
  *
- * @param obj - target object used to create state object.
+ * @param model - target object used to create state object.
  * @param value - default value of mutation descriptor.
  * @returns - New state object.
  */
-export declare function buildMutationFromObject<DType, T>(obj: DType, value: T): MutatedAttribute<DType, T>;
+export declare function buildMutationFromObject<DType extends {
+    [field: string]: any;
+}, T>(model: DType, value: T): MutatedAttribute<DType, T>;
 /**
  *
  * @param state Current state object.

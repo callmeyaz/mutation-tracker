@@ -15,7 +15,9 @@ export declare function getAttribute(model: any, key: string | string[], default
  * @param result - updated state object already updated recursively.
  * @returns - updated state object.
  */
-export declare function setAllAttributesMuted<T>(model: any, value: T, processed?: any, result?: any): any;
+export declare function setAllAttributesMuted<DType extends {
+    [field: string]: any;
+}, T>(model: DType, value: T, processed?: any, result?: any): any;
 /**
  *
  * @param model - state object to be updated.

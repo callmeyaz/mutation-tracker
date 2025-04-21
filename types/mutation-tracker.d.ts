@@ -1,4 +1,4 @@
-import { KeyValuePair, MutatedAttribute } from "./mutation-state";
+import { MutatedAttribute } from "./mutation-state";
 export type InitialMutation<T> = {
     mutatedAttributes?: string[];
     mutatedValue: T;
@@ -15,7 +15,9 @@ export type MutationState<DType, T> = {
  * @param config - Configuration object.
  * @returns - Returns mutation tracker instance.
  */
-declare function track<T, DType extends KeyValuePair>(target: DType, config: MutationConfig<T>): {
+declare function track<T, DType extends {
+    [field: string]: any;
+}>(target: DType, config: MutationConfig<T>): {
     readonly initiallyMutatedAttributes: string[] | undefined;
     readonly initiallyMutatedValue: T | undefined;
     readonly state: MutatedAttribute<DType, T>;
