@@ -10,7 +10,7 @@ export type MutationConfig<T> = {
 export type MutationState<DType, T> = {
     mutation: MutatedAttribute<DType, T>;
 };
-export interface IMutationTracker<T, DType> {
+export interface IMutationTracker<DType, T> {
     readonly initiallyMutatedAttributes: string[] | undefined;
     readonly initiallyMutatedValue: T | undefined;
     readonly state: MutatedAttribute<DType, T> | undefined;
@@ -28,7 +28,7 @@ export interface IMutationTracker<T, DType> {
  */
 declare function track<T, DType extends {
     [field: string]: any;
-}>(target: DType, config: MutationConfig<T>): IMutationTracker<T, DType>;
+}>(target: DType, config: MutationConfig<T>): IMutationTracker<DType, T>;
 export declare const MutationTracker: typeof track;
 export {};
 //# sourceMappingURL=mutation-tracker.d.ts.map

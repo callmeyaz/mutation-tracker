@@ -23,7 +23,7 @@ export type MutationState<DType, T> = {
     mutation: MutatedAttribute<DType, T>
 }
 
-export interface IMutationTracker<T, DType> {
+export interface IMutationTracker<DType, T> {
     readonly initiallyMutatedAttributes: string[] | undefined;
     readonly initiallyMutatedValue: T | undefined;
     readonly state: MutatedAttribute<DType, T> | undefined;
@@ -40,7 +40,7 @@ export interface IMutationTracker<T, DType> {
  * @param config - Configuration object.
  * @returns - Returns mutation tracker instance.
  */
-function track<T, DType extends { [field: string]: any }>(target: DType, config: MutationConfig<T>): IMutationTracker<T, DType> {
+function track<DType extends { [field: string]: any }, T>(target: DType, config: MutationConfig<T>): IMutationTracker<DType, T> {
     const _mutationTemplate = buildMutationTemplateFromObject(target, config.defaultValue);
     const _currentState: MutationState<DType, T> = { mutation: _mutationTemplate };
     const _initiallyMutated = config?.initialMutation;
