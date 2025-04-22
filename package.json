@@ -3,21 +3,24 @@
   "description": "Library that provides means to tracks mutation in JSON objects.",
   "version": "1.0.19",
   "license": "MIT",
-  "main": "./src/main.ts",
+  "main": "./dist/main.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/callmeyaz/mutation-tracker.git"
   },
   "scripts": {
     "build": "tsc",
-    "start": "node dist/index.js",
+    "start": "tsx ./src/test-bed.ts",
     "dev": "npm run build && npm run start",
     "watch": "tsc -w"
   },
-  "types": "./types/main.d.ts",
+  "types": "./dist/types/main.d.ts",
+  "type": "module",
   "devDependencies": {
-    "@types/lodash": "^4.17.16",
-    "lodash": "^4.17.21",
+    "@types/lodash-es": "^4.17.12",
+    "lodash-es": "^4.17.21",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.3",
     "typescript": "^5.8.3"
   }
 }

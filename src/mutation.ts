@@ -1,4 +1,7 @@
-import { cloneDeep, isInteger, isObject, toPath } from "lodash";
+import cloneDeep from "lodash-es/cloneDeep";
+import isInteger from "lodash-es/isInteger";
+import isObject from "lodash-es/isObject";
+import toPath from "lodash-es/toPath";
 
 /**
  * 
@@ -76,7 +79,7 @@ export function setAttributeMutatedMultiple<T>(model: any, value: T, ...paths: s
  * @param path - qualified paths of the attribute.
  * @returns - value of mutation in state object.
  */
-export function getAttributeMutation<T>(model: any, path: string) : T {
+export function getAttributeMutation<T>(model: any, path: string): T {
   let copy: any = cloneDeep(model);
   let currentNode: any = copy;
   let index = 0;

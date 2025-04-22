@@ -2,13 +2,12 @@ import {
     buildMutationFromObject as buildMutationTemplateFromObject,
     clearMutatedState,
     getMutationByAttributePath,
-    KeyValuePair,
     MutatedAttribute,
     setMutatedAllAttributes,
     setMutatedByAttributePath,
     setMutatedByAttributePaths
 } from "./mutation-state";
-import { isArray } from "lodash";
+import isArray from "lodash-es/isArray";
 
 export type InitialMutation<T> = {
     mutatedAttributes?: string[];
