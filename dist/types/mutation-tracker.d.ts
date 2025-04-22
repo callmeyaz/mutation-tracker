@@ -10,6 +10,17 @@ export type MutationConfig<T> = {
 export type MutationState<DType, T> = {
     mutation: MutatedAttribute<DType, T>;
 };
+export interface IMutationTracker<DType, T> {
+    readonly initiallyMutatedAttributes: string[] | undefined;
+    readonly initiallyMutatedValue: T | undefined;
+    readonly state: MutatedAttribute<DType, T> | undefined;
+    clear: () => void;
+    reset: () => void;
+    setAll: (value: T) => void;
+    getMutatedByAttributeName: (attributeName: string) => T;
+    setMutatedByAttributeName: (value: T, attributeName: string) => void;
+    setMutatedByAttributeNames: (value: T, attributeNames: string[]) => void;
+}
 /**
  *
  * @param config - Configuration object.
@@ -17,17 +28,7 @@ export type MutationState<DType, T> = {
  */
 declare function track<T, DType extends {
     [field: string]: any;
-}>(target: DType, config: MutationConfig<T>): {
-    readonly initiallyMutatedAttributes: string[] | undefined;
-    readonly initiallyMutatedValue: T | undefined;
-    readonly state: MutatedAttribute<DType, T>;
-    clear: () => void;
-    reset: () => void;
-    setAll: (value: T) => void;
-    getMutatedByAttributeName: (attributeName: string) => T;
-    setMutatedByAttributeName: (value: T, attributeName: string) => void;
-    setMutatedByAttributeNames: (value: T, attributeNames: string[]) => void;
-};
+}>(target: DType, config: MutationConfig<T>): IMutationTracker<DType, T>;
 export declare const MutationTracker: typeof track;
 export {};
 //# sourceMappingURL=mutation-tracker.d.ts.map
