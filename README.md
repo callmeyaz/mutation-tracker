@@ -1,4 +1,4 @@
-# mutation-tracker 1.0.23
+# mutation-tracker 1.0.24
 
 ### Why?
 Mutation Tracker is born out of a need to track and manage **dirty** state of properties/attributes
