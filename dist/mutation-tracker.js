@@ -9,7 +9,7 @@ import { buildMutationFromObject as buildMutationTemplateFromObject, clearMutate
 function track(target, config) {
     const _mutationTemplate = buildMutationTemplateFromObject(target, config.defaultValue);
     const _currentState = { mutation: _mutationTemplate };
-    const _initiallyMutated = config === null || config === void 0 ? void 0 : config.initialMutation;
+    const _initiallyMutated = config?.initialMutation;
     resetState();
     function clearState() {
         const ret = clearMutatedState(_currentState, _mutationTemplate);
@@ -17,8 +17,8 @@ function track(target, config) {
     }
     function resetState() {
         clearState();
-        const attributesNames = _initiallyMutated === null || _initiallyMutated === void 0 ? void 0 : _initiallyMutated.mutatedAttributes;
-        const value = _initiallyMutated === null || _initiallyMutated === void 0 ? void 0 : _initiallyMutated.mutatedValue;
+        const attributesNames = _initiallyMutated?.mutatedAttributes;
+        const value = _initiallyMutated?.mutatedValue;
         if (attributesNames && value && isArray(attributesNames) && attributesNames.length > 0) {
             const ret = setMutatedByAttributePaths(_currentState, value, attributesNames);
             _currentState.mutation = ret.mutation;
@@ -41,8 +41,8 @@ function track(target, config) {
         return ret;
     }
     return {
-        get initiallyMutatedAttributes() { return cloneDeep((_initiallyMutated === null || _initiallyMutated === void 0 ? void 0 : _initiallyMutated.mutatedAttributes) || []); },
-        get initiallyMutatedValue() { return cloneDeep(_initiallyMutated === null || _initiallyMutated === void 0 ? void 0 : _initiallyMutated.mutatedValue); },
+        get initiallyMutatedAttributes() { return cloneDeep(_initiallyMutated?.mutatedAttributes || []); },
+        get initiallyMutatedValue() { return cloneDeep(_initiallyMutated?.mutatedValue); },
         get state() { return cloneDeep(_currentState.mutation); },
         clear: clearState,
         reset: resetState,

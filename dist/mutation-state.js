@@ -7,7 +7,7 @@ import { setAttributeMutated, setAttributeMutatedMultiple, setAllAttributesMuted
  * @returns - Updated state object.
  */
 export function setMutatedByAttribute(state, value) {
-    var ret = Object.assign(Object.assign({}, state), { mutation: value });
+    var ret = { ...state, mutation: value };
     return ret;
 }
 /**
@@ -28,7 +28,9 @@ export function getMutationByAttributePath(state, attributePath) {
  * @returns - Updated state object.
  */
 export function setMutatedByAttributePath(state, value, attributePath) {
-    var ret = Object.assign(Object.assign({}, state), { mutation: setAttributeMutated(state.mutation, value, attributePath) });
+    var ret = {
+        ...state, mutation: setAttributeMutated(state.mutation, value, attributePath)
+    };
     return ret;
 }
 /**
@@ -39,7 +41,9 @@ export function setMutatedByAttributePath(state, value, attributePath) {
  * @returns - Updated state object.
  */
 export function setMutatedByAttributePaths(state, value, attributePaths) {
-    var ret = Object.assign(Object.assign({}, state), { mutation: setAttributeMutatedMultiple(state.mutation, value, ...attributePaths) });
+    var ret = {
+        ...state, mutation: setAttributeMutatedMultiple(state.mutation, value, ...attributePaths)
+    };
     return ret;
 }
 /**

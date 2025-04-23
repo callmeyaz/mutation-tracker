@@ -12,7 +12,8 @@
     "build": "tsc",
     "start": "tsx ./src/test-bed.ts",
     "dev": "npm run build && npm run start",
-    "watch": "tsc -w"
+    "watch": "tsc -w",
+    "pkg": "npm update --save"
   },
   "types": "./dist/types/main.d.ts",
   "type": "module",

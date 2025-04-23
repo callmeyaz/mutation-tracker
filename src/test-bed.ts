@@ -1,21 +1,21 @@
 import { MutationTracker } from "./mutation-tracker";
 
 var user = {
-	name: {
-		firstname: "John",
-		lastname: "Doe"
-	},
-	address: "123 Happy Street"
+  name: {
+    firstname: "John",
+    lastname: "Doe"
+  },
+  address: "123 Happy Street"
 }
 
 var tracker = MutationTracker<typeof user, boolean>(user, {
-	initialMutation: {
-		mutatedAttributes: [
-			"name.firstname"
-		],
-		mutatedValue: true
-	},
-	defaultValue: false
+  initialMutation: {
+    mutatedAttributes: [
+      "name.firstname"
+    ],
+    mutatedValue: true
+  },
+  defaultValue: false
 });
 
 console.log(JSON.stringify(tracker.state));
