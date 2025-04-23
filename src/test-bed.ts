@@ -8,7 +8,7 @@ var user = {
 	address: "123 Happy Street"
 }
 
-var tracker = MutationTracker<boolean, typeof user>(user, {
+var tracker = MutationTracker<typeof user, boolean>(user, {
 	initialMutation: {
 		mutatedAttributes: [
 			"name.firstname"
@@ -40,3 +40,8 @@ tracker.clear();
 console.log(JSON.stringify(tracker.state));
 // { name: { firstname: false, lastname: false }, false}
 
+var state = tracker.state;
+state!.address = true;
+console.log(JSON.stringify(state));
+console.log(JSON.stringify(tracker.state));
+// { name: { firstname: false, lastname: false }, true}

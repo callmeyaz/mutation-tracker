@@ -1,3 +1,4 @@
+import isArray from "lodash-es/isArray";
 import cloneDeep from "lodash-es/cloneDeep";
 import isInteger from "lodash-es/isInteger";
 import isObject from "lodash-es/isObject";
@@ -71,7 +72,7 @@ export function getAttributeMutation(model, path) {
     for (; index < pathList.length - 1; index++) {
         const currentPath = pathList[index];
         let currentObj = getAttribute(model, pathList.slice(0, index + 1));
-        if (currentObj && (isObject(currentObj) || Array.isArray(currentObj))) {
+        if (currentObj && (isObject(currentObj) || isArray(currentObj))) {
             currentNode = currentNode[currentPath] = cloneDeep(currentObj);
         }
         else {

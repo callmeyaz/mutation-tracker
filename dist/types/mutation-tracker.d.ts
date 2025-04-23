@@ -26,9 +26,9 @@ export interface IMutationTracker<DType, T> {
  * @param config - Configuration object.
  * @returns - Returns mutation tracker instance.
  */
-declare function track<T, DType extends {
+declare function track<DType extends {
     [field: string]: any;
-}>(target: DType, config: MutationConfig<T>): IMutationTracker<DType, T>;
+}, T>(target: DType, config: MutationConfig<T>): IMutationTracker<DType, T>;
 export declare const MutationTracker: typeof track;
 export {};
 //# sourceMappingURL=mutation-tracker.d.ts.map

@@ -1,5 +1,6 @@
-import { buildMutationFromObject as buildMutationTemplateFromObject, clearMutatedState, getMutationByAttributePath, setMutatedAllAttributes, setMutatedByAttributePath, setMutatedByAttributePaths } from "./mutation-state";
 import isArray from "lodash-es/isArray";
+import cloneDeep from "lodash-es/cloneDeep";
+import { buildMutationFromObject as buildMutationTemplateFromObject, clearMutatedState, getMutationByAttributePath, setMutatedAllAttributes, setMutatedByAttributePath, setMutatedByAttributePaths } from "./mutation-state";
 /**
  *
  * @param config - Configuration object.
@@ -40,9 +41,9 @@ function track(target, config) {
         return ret;
     }
     return {
-        get initiallyMutatedAttributes() { return _initiallyMutated === null || _initiallyMutated === void 0 ? void 0 : _initiallyMutated.mutatedAttributes; },
-        get initiallyMutatedValue() { return _initiallyMutated === null || _initiallyMutated === void 0 ? void 0 : _initiallyMutated.mutatedValue; },
-        get state() { return _currentState.mutation; },
+        get initiallyMutatedAttributes() { return cloneDeep((_initiallyMutated === null || _initiallyMutated === void 0 ? void 0 : _initiallyMutated.mutatedAttributes) || []); },
+        get initiallyMutatedValue() { return cloneDeep(_initiallyMutated === null || _initiallyMutated === void 0 ? void 0 : _initiallyMutated.mutatedValue); },
+        get state() { return cloneDeep(_currentState.mutation); },
         clear: clearState,
         reset: resetState,
         setAll: setAllState,
