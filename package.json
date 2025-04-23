@@ -11,7 +11,7 @@
   "scripts": {
     "build": "tsc",
     "start": "tsx ./src/test-bed.ts",
-    "dev": "npm run build && npm run start",
+    "dev": "npm run pkg && npm run build && npm run start && npm version patch",
     "watch": "tsc -w",
     "pkg": "npm update --save"
   },
