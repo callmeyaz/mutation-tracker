@@ -53,7 +53,7 @@ export function setMutatedByAttributePaths(state, value, attributePaths) {
  * @returns - New state object.
  */
 export function buildMutationFromObject(model, value) {
-    var ret = setAllAttributesMuted(model, value);
+    var ret = setAllAttributesMuted(model || {}, value);
     return ret;
 }
 /**

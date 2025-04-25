@@ -11,9 +11,9 @@ export type MutationState<DType, T> = {
     mutation: MutatedAttribute<DType, T>;
 };
 export interface IMutationTracker<DType, T> {
-    readonly initiallyMutatedAttributes: string[] | undefined;
-    readonly initiallyMutatedValue: T | undefined;
-    readonly state: MutatedAttribute<DType, T> | undefined;
+    readonly initiallyMutatedAttributes: string[];
+    readonly initiallyMutatedValue: T;
+    readonly state: MutatedAttribute<DType, T>;
     clear: () => void;
     reset: () => void;
     setAll: (value: T) => void;

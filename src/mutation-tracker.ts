@@ -25,9 +25,9 @@ export type MutationState<DType, T> = {
 }
 
 export interface IMutationTracker<DType, T> {
-  readonly initiallyMutatedAttributes: string[] | undefined;
-  readonly initiallyMutatedValue: T | undefined;
-  readonly state: MutatedAttribute<DType, T> | undefined;
+  readonly initiallyMutatedAttributes: string[];
+  readonly initiallyMutatedValue: T;
+  readonly state: MutatedAttribute<DType, T>;
   clear: () => void;
   reset: () => void;
   setAll: (value: T) => void;
@@ -55,7 +55,7 @@ function track<DType extends { [field: string]: any }, T>(target: DType, config:
 
   function resetState() {
     clearState();
-    const attributesNames = _initiallyMutated?.mutatedAttributes;
+    const attributesNames = _initiallyMutated?.mutatedAttributes || [];
     const value = _initiallyMutated?.mutatedValue;
 
     if (attributesNames && value && isArray(attributesNames) && attributesNames.length > 0) {
@@ -86,7 +86,7 @@ function track<DType extends { [field: string]: any }, T>(target: DType, config:
 
   return {
     get initiallyMutatedAttributes() { return cloneDeep(_initiallyMutated?.mutatedAttributes || []) },
-    get initiallyMutatedValue() { return cloneDeep(_initiallyMutated?.mutatedValue) },
+    get initiallyMutatedValue() { return cloneDeep(_initiallyMutated?.mutatedValue) || {} as T },
     get state() { return cloneDeep(_currentState.mutation) },
     clear: clearState,
     reset: resetState,

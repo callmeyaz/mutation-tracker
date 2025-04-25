@@ -103,7 +103,7 @@ export function buildMutationFromObject<DType extends { [field: string]: any }, 
   model: DType,
   value: T)
   : MutatedAttribute<DType, T> {
-  var ret = setAllAttributesMuted(model, value);
+  var ret = setAllAttributesMuted(model || {}, value);
   return ret
 }
 

@@ -17,7 +17,7 @@ function track(target, config) {
     }
     function resetState() {
         clearState();
-        const attributesNames = _initiallyMutated?.mutatedAttributes;
+        const attributesNames = _initiallyMutated?.mutatedAttributes || [];
         const value = _initiallyMutated?.mutatedValue;
         if (attributesNames && value && isArray(attributesNames) && attributesNames.length > 0) {
             const ret = setMutatedByAttributePaths(_currentState, value, attributesNames);
@@ -42,7 +42,7 @@ function track(target, config) {
     }
     return {
         get initiallyMutatedAttributes() { return cloneDeep(_initiallyMutated?.mutatedAttributes || []); },
-        get initiallyMutatedValue() { return cloneDeep(_initiallyMutated?.mutatedValue); },
+        get initiallyMutatedValue() { return cloneDeep(_initiallyMutated?.mutatedValue) || {}; },
         get state() { return cloneDeep(_currentState.mutation); },
         clear: clearState,
         reset: resetState,
