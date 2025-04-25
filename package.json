@@ -1,7 +1,7 @@
 {
   "name": "mutation-tracker",
   "description": "Library that provides means to tracks mutation in JSON objects.",
-  "version": "1.0.29",
+  "version": "1.0.30",
   "license": "MIT",
   "main": "./dist/main.js",
   "repository": {
@@ -10,8 +10,8 @@
   },
   "scripts": {
     "build": "tsc",
-    "start": "tsx ./src/test-bed.ts",
-    "dev": "npm run pkg && npm run build && npm run start && npm version patch",
+    "start": "tsx ./tests/test-bed.ts",
+    "dev": "npm run pkg && npm install && npm run build && npm run start",
     "watch": "tsc -w",
     "pkg": "npm update --save"
   },

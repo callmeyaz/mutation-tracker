@@ -1,4 +1,4 @@
-import { MutationTracker } from "./mutation-tracker";
+import { MutationTracker } from "../src/mutation-tracker";
 
 var user = {
   name: {
