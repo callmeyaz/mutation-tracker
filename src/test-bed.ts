@@ -9,12 +9,6 @@ var user = {
 }
 
 var tracker = MutationTracker<typeof user, boolean>(user, {
-  initialMutation: {
-    mutatedAttributes: [
-      "name.firstname"
-    ],
-    mutatedValue: true
-  },
   defaultValue: false
 });
 

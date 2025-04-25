@@ -1,16 +1,57 @@
-# mutation-tracker 1.0.27
+# mutation-tracker 1.0.29
 
 ### Why?
-Mutation Tracker is born out of a need to track and manage **dirty** state of properties/attributes
-within JavaScript objects. A major use case of Mutation Tracker library is to track the
-states of objects that represent HTML Form Field values.
+
+Mutation-Tracker is born out of a need to track and manage **dirty** state of JSON objects. Imagine we have JSON object that undergoes mutations where its property values are changed	over time and we need to track what properties are changed.
+
+This is where mutation-tracker comes in. Mutation-tracker provides a set of APIs to store
+path of the properties and type of mutation that occured within an object.
+
+check out the npm package **[form-runner](https://www.npmjs.com/package/form-runner)** that uses **[mutation-tracker](https://www.npmjs.com/package/mutation-tracker)** to implement unopinionated front-end form validation library.
 
 ### How?
-Mutation Tracker internally maintains a state object, that represents changes that we track
-at any time. Once the tracker is initialized (optioanlly) by providing a target data object,
-mutation tracker internally creates a mirror structure of the object. Later, when there is a
-change that need to be tracked, we record that change through exposed API functions. Newly
-added attributed are auto added to the internal state if not tracked earlier.
+Mutation-Tracker internally maintains a state object to track changes.
+
+Once, the tracker is initialized by providing a source JSON object, mutation library internally replicates the structure of the JSON object to create a ***state***. By using provided APIs and fully qualified path of the properties we record the mutation and later retrive it when needed.
+
+Not only this, since the change tracking is fully qualified property name driven, if a new fully qualified path is provided which does not exist within the mutation state then the library adds one. This is beneficial when a new property is added to the source JSON object after the mutation tracker is initialized.
+
+Above also means that even if we do not have a JSON object as source we can start fresh with blank slate i.e. an empty JSON object **{}** and track changes as we build this JSON object.
+
+Below is a sample JSON object.
+
+```javascript
+var user = {
+	name: {
+		firstname: "John",
+		lastname: "Doe"
+	},
+	address: "123 Main Street"
+}
+```
+Below is one of the ways to initialize mutation-tracker instance.
+
+```javascript
+// Below we are using **boolean** as the mutation descriptor type.
+var tracker = MutationTracker<typeof user, boolean>(user, {
+  defaultValue: false
+});
+```
+Below is how mutation-tracker library would store the state as:
+
+```javascript
+var user = {
+	name: {
+		firstname: false,
+		lastname: false
+	},
+	address: false
+}
+```
+
+### Mutation descriptor type?
+Mutation descriptor type is the type of mutation information that we need to store with each mutated property. In above exampled we have used a **boolean** type but we can use an type we want as long. As a best pratice keep it as simpler as possible.
+
 
 ### Usage?
 
@@ -32,13 +73,14 @@ var user = {
 	address: "123 Main Street"
 }
 ```
-To track changes in the object above, we can mark those property changes as follows.
+To track changes in the object above, we can track the property changes as follows:
 
 ```javascript
 
+// Import the mutation library reference.
 import { MutationTracker } from "./mutation-tracker";
 
-// create a new instance of mutation-tracker
+// Create a new instance of mutation-tracker with it's own state.
 var tracker = MutationTracker(user, { defaultValue: false });
 
 // set name.firstname property as mutated
@@ -46,11 +88,19 @@ tracker.setMutatedByAttributeName(true, "name.firstname");
 
 console.log(JSON.stringify(tracker.state));
 // { name: { firstname: true, lastname: false }, address: false }
+
+// Add a new property of type array.
+tracker.setMutatedByAttributeName(true, "roles[0]");
+
+console.log(JSON.stringify(tracker.state));
+// { name: { firstname: true, lastname: false }, roles: [ true ], address: false }
 ```
 
-### Samples
+### Examples
 
-#### 1 - Initialization for existing object
+Below are a few example that shows some but not all of the potential of mutation-tracker library.
+
+#### 1 - Initialization with typed object
 
 ```javascript
 var tracker = MutationTracker(user, { defaultValue: false });
@@ -58,7 +108,7 @@ console.log(JSON.stringify(tracker.state));
 // { name: { firstname: false, lastname: false }, address: false }
 ```
 
-#### 2 - Initialization for new object
+#### 2 - Initialization with empty object
 
 ```javascript
 var tracker = MutationTracker({}, { defaultValue: false });
@@ -66,7 +116,7 @@ console.log(JSON.stringify(tracker.state));
 // {}
 ```
 
-#### 3 - Set mutated to *true* for existing object
+#### 3 - Set mutation for typed object
 
 ```javascript
 var tracker = MutationTracker(user, { defaultValue: false });
@@ -75,7 +125,7 @@ console.log(JSON.stringify(tracker.state));
 // { name: { firstname: true, lastname: false }, address: false }
 ```
 
-#### 4 - Set mutated to *true* for new object
+#### 4 - Set mutation for empty object
 
 ```javascript
 var tracker = MutationTracker({}, { defaultValue: false });
@@ -84,7 +134,7 @@ console.log(JSON.stringify(tracker.state));
 // { name: { firstname: true }
 ```
 
-#### 5 - Set mutated to *true* at initialization
+#### 5 - Set mutation on initialization
 
 ```javascript
 var tracker = MutationTracker({}, {
@@ -113,7 +163,7 @@ console.log(JSON.stringify(tracker.state));
 // { name: { firstname: true, lastname: true }, address: false }
 ```
 
-#### 7 - get mutation value of attribute
+#### 7 - Get mutation value of attribute
 
 ```javascript
 var tracker = MutationTracker(user, { defaultValue: false });
@@ -141,7 +191,7 @@ console.log(JSON.stringify(tracker.state));
 
 ```javascript
 var tracker = MutationTracker({}, {
-	defaultValue: false, 
+	defaultValue: false,
 	initialMutation: {
 		mutatedAttributes: [
 			"name.firstname"
@@ -183,16 +233,22 @@ console.log(JSON.stringify(tracker.state));
 // { name: { firstname: false, lastname: false }, address: false }
 ```
 
-#### 11 - Using value type **boolean** for mutaiton tracking
+#### 11 - Including new attribute for mutation
 
 ```javascript
-var tracker = MutationTracker<boolean>(user, { defaultValue: false });
-tracker.setMutatedByAttributeName(true, "name.firstname");
+var tracker = MutationTracker(user, { defaultValue: false });
 console.log(JSON.stringify(tracker.state));
-// { name: { firstname: true, lastname: false }, address: false }
+// { name: { firstname: false, lastname: false }, address: false }
+
+tracker.setMutatedByAttributeName(true, "age");
+tracker.setMutatedByAttributeName(true, "role[0]");
+tracker.setMutatedByAttributeName(true, "role[1]");
+
+console.log(JSON.stringify(tracker.state));
+// { name: { firstname: false, lastname: false }, age: true, role [ true, true ], address: false }
 ```
 
-#### 12 - Using value type **number** for mutaiton tracking
+#### 12 - Using **number** as mutation descriptor
 
 ```javascript
 var tracker = MutationTracker<number>(user, { defaultValue: 0 });
@@ -205,6 +261,9 @@ console.log(JSON.stringify(tracker.state));
 ## Documentation
 
 ### MutationTracker
+
+below is the list of functions and properties available with mutation-tracker.
+
 | Property/Function  |  Description |
 | ------------ | ------------ |
 |  MutationTracker<T, Values>(target: Values, config: MutationConfig<T>) | constructor   |
@@ -219,6 +278,8 @@ console.log(JSON.stringify(tracker.state));
 | MutationTracker.state  | Returns object that represents current state of tracked mutations |
 
 ### MutationConfig
+below is the list of properties avaiable on configuration object to initialize mutation-tracker.
+
 | Property/Function  |  Description |
 | ------------ | ------------ |
 |  MutationConfig.initialMutation | configuration for initial mutation  |
