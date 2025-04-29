@@ -2,21 +2,29 @@
 
 ### Why?
 
-Mutation-Tracker is born out of a need to track and manage **dirty** state of JSON objects. Imagine we have JSON object that undergoes mutations where its property values are changed	over time and we need to track what properties are changed.
+Mutation-Tracker tracks **dirty** state of JSON objects. Imagine we have a JSON object that undergoes mutations, and we need to track what properties are changed.
 
-This is where mutation-tracker comes in. Mutation-tracker provides a set of APIs to store
-path of the properties and type of mutation that occured within an object.
+This is where the ***mutation-tracker*** library shines. Mutation-tracker provides a set of APIs to record mutations for JSON objects using full path to the object properties.
+
+Below is an example of tracking change in property "name.firstname":
+
+```javascript
+// set name.firstname property as mutated by setting a boolean flag to true.
+tracker.setMutatedByAttributeName(true, "name.firstname");
+```
+
+Above we are using boolean flag but we can also use other data types as mutation flags.
 
 check out the npm package **[form-runner](https://www.npmjs.com/package/form-runner)** that uses **[mutation-tracker](https://www.npmjs.com/package/mutation-tracker)** to implement unopinionated front-end form validation library.
 
 ### How?
 Mutation-Tracker internally maintains a state object to track changes.
 
-Once, the tracker is initialized by providing a source JSON object, mutation library internally replicates the structure of the JSON object to create a ***state***. By using provided APIs and fully qualified path of the properties we record the mutation and later retrive it when needed.
+Once, the tracker is initialized by providing a source JSON object, mutation library internally replicates the structure of the JSON object to create a ***state***. With provided APIs, we record the mutations by setting the mutation flag and full path of the properties which we can later retrieve when needed.
 
-Not only this, since the change tracking is fully qualified property name driven, if a new fully qualified path is provided which does not exist within the mutation state then the library adds one. This is beneficial when a new property is added to the source JSON object after the mutation tracker is initialized.
+Not only this, since the change tracking is driven by full path to the property, if we request to track a new property which is not tracked before then the library adds it to the state.
 
-Above also means that even if we do not have a JSON object as source we can start fresh with blank slate i.e. an empty JSON object **{}** and track changes as we build this JSON object.
+This also means that even if we do not have a typed JSON object initially, we can still start with an empty JSON object **{}** and track mutations as we add more properties to this JSON object.
 
 Below is a sample JSON object.
 
@@ -154,7 +162,7 @@ console.log(JSON.stringify(tracker.state));
 #### 6 - Set multiple mutations
 
 ```javascript
-var tracker = MutationTracker(user, {});
+var tracker = MutationTracker(user, { defaultValue: false });
 tracker.setMutatedByAttributeNames(true, [
 	"name.firstname",
 	"name.lastname"
