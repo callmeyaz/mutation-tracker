@@ -9,6 +9,19 @@ This is where the ***mutation-tracker*** library shines. Mutation-tracker provid
 Below is an example of tracking change in property "name.firstname":
 
 ```javascript
+
+var user = {
+	name: {
+		firstname: "John",
+		lastname: "Doe"
+	},
+	address: "123 Main Street"
+}
+
+var tracker = MutationTracker<typeof user, boolean>(user, {
+  defaultValue: false
+});
+
 // set name.firstname property as mutated by setting a boolean flag to true.
 tracker.setMutatedByAttributeName(true, "name.firstname");
 ```
