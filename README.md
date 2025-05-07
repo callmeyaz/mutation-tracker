@@ -77,8 +77,9 @@ var user = {
 }
 ```
 
-### Mutation descriptor type?
-Mutation descriptor type is the type of mutation information that we need to store with each mutated property. In above exampled we have used a **boolean** type but we can use an type we want as long. As a best pratice keep it as simpler as possible.
+### Mutation descriptor?
+Mutation descriptor is the type of mutation information that we want to associate with each mutated property. In above exampled we have used a **boolean** type descriptor but we can use any descriptor type we want.
+It is suggested though to keep descriptor type as simple as possible.
 
 
 ### Usage?
