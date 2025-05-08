@@ -1,4 +1,10 @@
-import isArray from "lodash-es/isArray";
+/**
+ * This module provides utility functions and types for managing and tracking
+ * mutations in a nested object tree. It includes functions to set, retrieve,
+ * and clear mutation descriptors for attributes in the object tree.
+ */
+
+
 import cloneDeep from "lodash-es/cloneDeep";
 import {
   buildMutationFromObject as buildMutationTemplateFromObject,
@@ -10,15 +16,25 @@ import {
   setMutatedByAttributePaths
 } from "./mutation-state";
 
+/**
+ * It allows you to set, get, and clear mutations for 
+ * specific attributes or all attributes in the 
+ * object tree at the time of initilization.
+ */
 export type InitialMutation<T> = {
   mutatedAttributes?: string[];
   mutatedValue: T;
 }
 
+/**
+ * * It allows you to set, get, and clear mutations for
+ * specific attributes or all attributes in the
+ */
 export type MutationConfig<T> = {
   initialMutation?: InitialMutation<T>;
   defaultValue: T;
 }
+
 
 export type MutationState<DType, T> = {
   mutation: MutatedAttribute<DType, T>
@@ -48,33 +64,33 @@ function track<DType extends { [field: string]: any }, T>(target: DType, config:
 
   resetState();
 
-  function clearState() {
+  function clearState(): void {
     const ret = clearMutatedState(_currentState, _mutationTemplate);
     _currentState.mutation = ret.mutation;
   }
 
-  function resetState() {
+  function resetState(): void {
     clearState();
     const attributesNames = _initiallyMutated?.mutatedAttributes || [];
     const value = _initiallyMutated?.mutatedValue;
 
-    if (attributesNames && value && isArray(attributesNames) && attributesNames.length > 0) {
+    if (attributesNames.length > 0 && value) {
       const ret = setMutatedByAttributePaths(_currentState, value, attributesNames);
       _currentState.mutation = ret.mutation;
     }
   }
 
-  function setAllState(value: T) {
+  function setAllState(value: T): void {
     const ret = setMutatedAllAttributes(_currentState, value);
     _currentState.mutation = ret.mutation;
   }
 
-  function setMutatedByAttributeName(value: T, attributeName: string) {
+  function setMutatedByAttributeName(value: T, attributeName: string): void {
     const ret = setMutatedByAttributePath(_currentState, value, attributeName);
     _currentState.mutation = ret.mutation;
   }
 
-  function setMutatedByAttributeNames(value: T, attributeNames: string[]) {
+  function setMutatedByAttributeNames(value: T, attributeNames: string[]): void {
     const ret = setMutatedByAttributePaths(_currentState, value, attributeNames);
     _currentState.mutation = ret.mutation;
   }
@@ -86,7 +102,7 @@ function track<DType extends { [field: string]: any }, T>(target: DType, config:
 
   return {
     get initiallyMutatedAttributes() { return cloneDeep(_initiallyMutated?.mutatedAttributes || []) },
-    get initiallyMutatedValue() { return cloneDeep(_initiallyMutated?.mutatedValue) || {} as T },
+    get initiallyMutatedValue() { return cloneDeep(_initiallyMutated?.mutatedValue || {} as T) },
     get state() { return cloneDeep(_currentState.mutation) },
     clear: clearState,
     reset: resetState,

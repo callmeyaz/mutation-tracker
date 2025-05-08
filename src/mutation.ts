@@ -5,8 +5,8 @@ import isObject from "lodash-es/isObject";
 import toPath from "lodash-es/toPath";
 
 /**
- * 
- * @param model - state object to be updated.
+ * Returns attribute value from the target object.
+ * @param model - target object.
  * @param key - qualified paths of the attribute.
  * @param defaultValue - default value when attribute not found.
  * @param index - index of the attribute currently traversed.
