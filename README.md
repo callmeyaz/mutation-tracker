@@ -2,29 +2,49 @@
 
 ### Why?
 
-Mutation-Tracker tracks **dirty** state of JSON objects. Imagine we have a JSON object that undergoes mutations, and we need to track what properties are changed.
+Mutation-Tracker tracks **dirty** state of JSON objects so that we can mark changes in the object for delayed synchronization.
 
-This is where the ***mutation-tracker*** library shines. Mutation-tracker provides a set of APIs to record mutations for JSON objects using full path to the object properties.
+Imagine we have a JSON object that undergoes mutation multiple times, and we need to track what properties are changed.
 
-Below is an example of tracking change in property "name.firstname":
+This is where the ***mutation-tracker*** library shines.
+
+Mutation-tracker provides a set of APIs to record mutations for JSON objects using fully qualified name of the object properties.
+
+Below is an example of tracking a change in property having fully qualified name as "name.firstname":
 
 ```javascript
+
+var user = {
+	name: {
+		firstname: "John",
+		lastname: "Doe"
+	},
+	address: "123 Main Street"
+}
+
+var tracker = MutationTracker<typeof user, boolean>(user, {
+  defaultValue: false
+});
+
 // set name.firstname property as mutated by setting a boolean flag to true.
 tracker.setMutatedByAttributeName(true, "name.firstname");
 ```
 
-Above we are using boolean flag but we can also use other data types as mutation flags.
+Above, we are using boolean datatype/descriptor as a flag to track mutation but we can also use other data types as mutation flags.
 
 check out the npm package **[form-runner](https://www.npmjs.com/package/form-runner)** that uses **[mutation-tracker](https://www.npmjs.com/package/mutation-tracker)** to implement unopinionated front-end form validation library.
 
 ### How?
-Mutation-Tracker internally maintains a state object to track changes.
+Mutation-Tracker internally maintains a mirror state object to track changes.
 
-Once, the tracker is initialized by providing a source JSON object, mutation library internally replicates the structure of the JSON object to create a ***state***. With provided APIs, we record the mutations by setting the mutation flag and full path of the properties which we can later retrieve when needed.
+Once, we initialize a tracker by providing a source JSON object, mutation library internally replicates the structure of the JSON object to create a ***state***. 
 
-Not only this, since the change tracking is driven by full path to the property, if we request to track a new property which is not tracked before then the library adds it to the state.
+With given APIs, we record the mutations by setting the mutation value and full qualified path of the properties which can later be retrieved.
 
-This also means that even if we do not have a typed JSON object initially, we can still start with an empty JSON object **{}** and track mutations as we add more properties to this JSON object.
+In case a new property is added to the JSON object after initializing the tracker, we can still request to track changes to this property. 
+
+This feature enables support for tracking change in un-typed JSON objects such as **{}**. 
+
 
 Below is a sample JSON object.
 
@@ -57,8 +77,9 @@ var user = {
 }
 ```
 
-### Mutation descriptor type?
-Mutation descriptor type is the type of mutation information that we need to store with each mutated property. In above exampled we have used a **boolean** type but we can use an type we want as long. As a best pratice keep it as simpler as possible.
+### Mutation descriptor?
+Mutation descriptor is the type of mutation information that we want to associate with each mutated property. In above exampled we have used a **boolean** type descriptor but we can use any descriptor type we want.
+It is suggested though to keep descriptor type as simple as possible.
 
 
 ### Usage?
