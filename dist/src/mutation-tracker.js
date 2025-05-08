@@ -45,7 +45,7 @@ function track(target, config) {
         setMutatedByAttributePaths(_currentState, value, getDefaultValue(), attributeNames);
     }
     function getMutatedByAttributeName(attributeName) {
-        return getMutationByAttributePath(_currentState, attributeName);
+        return getMutationByAttributePath(_currentState, getDefaultValue(), attributeName);
     }
     return {
         get initiallyMutatedAttributes() { return cloneDeep(_initiallyMutated?.mutatedAttributes); },

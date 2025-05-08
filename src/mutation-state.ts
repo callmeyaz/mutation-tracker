@@ -41,8 +41,8 @@ export function setMutatedByAttribute<DType, T>(
   state: MutatedState<DType, T>,
   value: MutatedAttribute<DType, T>)
   : MutatedState<DType, T> {
-  var ret = { ...state, mutation: value };
-  return ret;
+  var newState = { ...state, mutation: value };
+  return newState;
 }
 
 /**
@@ -53,10 +53,10 @@ export function setMutatedByAttribute<DType, T>(
  */
 export function getMutationByAttributePath<DType, T>(
   state: MutatedState<DType, T>,
+  defaultValue: T,
   attributePath: string)
   : T {
-  var ret = getAttributeMutation<T>(state.mutation, attributePath);
-  return ret;
+  return getAttributeMutation<T>(state.mutation, defaultValue, attributePath);
 }
 
 /**
@@ -69,12 +69,10 @@ export function getMutationByAttributePath<DType, T>(
 export function setMutatedByAttributePath<DType, T>(
   state: MutatedState<DType, T>,
   value: T,
+  defaultValue: T,
   attributePath: string)
-  : MutatedState<DType, T> {
-  var ret = {
-    ...state, mutation: setAttributeMutated(state.mutation, value, attributePath)
-  }
-  return ret;
+  : void {
+  state.mutation = setAttributeMutated(state.mutation, value, defaultValue, attributePath);
 }
 
 /**
@@ -87,12 +85,10 @@ export function setMutatedByAttributePath<DType, T>(
 export function setMutatedByAttributePaths<DType, T>(
   state: MutatedState<DType, T>,
   value: T,
+  defaultValue: T,
   attributePaths: string[])
-  : MutatedState<DType, T> {
-  var ret = {
-    ...state, mutation: setAttributeMutatedMultiple(state.mutation, value, ...attributePaths)
-  }
-  return ret;
+  : void {
+  state.mutation = setAttributeMutatedMultiple(state.mutation, value, defaultValue, ...attributePaths);
 }
 
 /**
@@ -105,8 +101,8 @@ export function buildMutationFromObject<DType extends { [field: string]: any }, 
   model: DType,
   value: T)
   : MutatedAttribute<DType, T> {
-  var ret = setAllAttributesMuted(model || {}, value);
-  return ret
+  var mutations = setAllAttributesMuted(model || {}, value);
+  return mutations
 }
 
 /**
@@ -118,21 +114,18 @@ export function buildMutationFromObject<DType extends { [field: string]: any }, 
 export function setMutatedAllAttributes<DType, T>(
   state: MutatedState<DType, T>,
   value: T)
-  : MutatedState<DType, T> {
-  var ret = { mutation: setAllAttributesMuted(state.mutation, value) };
-  return ret
+  : void {
+  state.mutation = setAllAttributesMuted(state.mutation, value);
 }
 
 /**
  * Clears all mutations in the object tree, resetting it to the initial template.
  * @param state - The current state object.
  * @param mutationTemplate - The initial mutation template to reset to.
- * @returns - A new state object with cleared mutations.
  */
 export function clearMutatedState<DType, T>(
   state: MutatedState<DType, T>,
   mutationTemplate: MutatedAttribute<DType, T>)
-  : MutatedState<DType, T> {
-  var ret = { mutation: cloneDeep(mutationTemplate) };
-  return ret;
+  : void {
+  state.mutation = cloneDeep(mutationTemplate);
 }

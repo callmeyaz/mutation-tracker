@@ -11,8 +11,9 @@ import toPath from "lodash-es/toPath";
  * @param index - index of the attribute currently traversed.
  * @returns - attribute value if found or default value passed as 'def'.
  */
-export function getAttribute(model, key, defaultValue, index = 0) {
+export function getAttribute(model, key, defaultValue) {
     const path = toPath(key);
+    var index = 0;
     while (model && index < path.length) {
         model = model[path[index++]];
     }
@@ -64,14 +65,14 @@ export function setAttributeMutatedMultiple(model, value, defaultValue, ...paths
  * @param path - qualified paths of the attribute.
  * @returns - value of mutation in state object.
  */
-export function getAttributeMutation(model, path) {
+export function getAttributeMutation(model, defaultValue, path) {
     let copy = cloneDeep(model);
     let currentNode = copy;
     let index = 0;
     let pathList = toPath(path);
     for (; index < pathList.length - 1; index++) {
         const currentPath = pathList[index];
-        let currentObj = getAttribute(model, pathList.slice(0, index + 1));
+        let currentObj = getAttribute(model, pathList.slice(0, index + 1), defaultValue);
         if (currentObj && (isObject(currentObj) || isArray(currentObj))) {
             currentNode = currentNode[currentPath] = cloneDeep(currentObj);
         }

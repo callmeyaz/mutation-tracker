@@ -12,13 +12,14 @@ import toPath from "lodash-es/toPath";
  * @param index - index of the attribute currently traversed.
  * @returns - attribute value if found or default value passed as 'def'.
  */
-export function getAttribute(
+export function getAttribute<T>(
   model: any,
   key: string | string[],
-  defaultValue?: any,
-  index: number = 0
+  defaultValue?: T
 ) {
   const path = toPath(key);
+  var index: number = 0;
+
   while (model && index < path.length) {
     model = model[path[index++]];
   }
@@ -66,9 +67,9 @@ export function setAllAttributesMuted<DType extends { [field: string]: any }, T>
  * @param paths - qualified paths of the attributes.
  * @returns - updated state object.
  */
-export function setAttributeMutatedMultiple<T>(model: any, value: T, ...paths: string[]): any {
+export function setAttributeMutatedMultiple<T>(model: any, value: T, defaultValue: T, ...paths: string[]): any {
   paths.forEach((path) => {
-    model = setAttributeMutated(model, value, path);
+    model = setAttributeMutated(model, value, defaultValue, path);
   });
 
   return model;
@@ -80,7 +81,7 @@ export function setAttributeMutatedMultiple<T>(model: any, value: T, ...paths: s
  * @param path - qualified paths of the attribute.
  * @returns - value of mutation in state object.
  */
-export function getAttributeMutation<T>(model: any, path: string): T {
+export function getAttributeMutation<T>(model: any, defaultValue: T, path: string): T {
   let copy: any = cloneDeep(model);
   let currentNode: any = copy;
   let index = 0;
@@ -88,7 +89,7 @@ export function getAttributeMutation<T>(model: any, path: string): T {
 
   for (; index < pathList.length - 1; index++) {
     const currentPath: string = pathList[index];
-    let currentObj: any = getAttribute(model, pathList.slice(0, index + 1));
+    let currentObj: any = getAttribute(model, pathList.slice(0, index + 1), defaultValue);
 
     if (currentObj && (isObject(currentObj) || isArray(currentObj))) {
       currentNode = currentNode[currentPath] = cloneDeep(currentObj);
@@ -109,7 +110,7 @@ export function getAttributeMutation<T>(model: any, path: string): T {
  * @param path - qualified path of the attribute.
  * @returns - updated state object.
  */
-export function setAttributeMutated<T>(model: any, value: T, path: string): any {
+export function setAttributeMutated<T>(model: any, value: T, defaultValue: T, path: string): any {
   let copy: any = cloneDeep(model);
   let currentNode: any = copy;
   let index = 0;
@@ -117,7 +118,7 @@ export function setAttributeMutated<T>(model: any, value: T, path: string): any 
 
   for (; index < pathList.length - 1; index++) {
     const currentPath: string = pathList[index];
-    let currentObj: any = getAttribute(model, pathList.slice(0, index + 1));
+    let currentObj: any = getAttribute(model, pathList.slice(0, index + 1), defaultValue);
 
     if (currentObj && (isObject(currentObj) || Array.isArray(currentObj))) {
       currentNode = currentNode[currentPath] = cloneDeep(currentObj);
