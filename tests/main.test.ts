@@ -1,4 +1,4 @@
-import { expect, test } from "../Utils/micro-tester";
+import { expect, test } from "../utils/micro-tester";
 import { MutationTracker } from "../src/mutation-tracker";
 
 var user = {

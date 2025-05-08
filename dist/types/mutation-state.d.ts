@@ -30,7 +30,7 @@ export declare function setMutatedByAttribute<DType, T>(state: MutatedState<DTyp
  * @param attributePath - The path to the attribute (dot-separated string).
  * @returns The mutation value for the specified attribute.
  */
-export declare function getMutationByAttributePath<DType, T>(state: MutatedState<DType, T>, attributePath: string): T;
+export declare function getMutationByAttributePath<DType, T>(state: MutatedState<DType, T>, defaultValue: T, attributePath: string): T;
 /**
  * Updates the mutation descriptor for a specific attribute in the object tree.
  * @param state - The current state object.

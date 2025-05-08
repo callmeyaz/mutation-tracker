@@ -16,9 +16,8 @@ export function setMutatedByAttribute(state, value) {
  * @param attributePath - The path to the attribute (dot-separated string).
  * @returns The mutation value for the specified attribute.
  */
-export function getMutationByAttributePath(state, attributePath) {
-    var newState = getAttributeMutation(state.mutation, attributePath);
-    return newState;
+export function getMutationByAttributePath(state, defaultValue, attributePath) {
+    return getAttributeMutation(state.mutation, defaultValue, attributePath);
 }
 /**
  * Updates the mutation descriptor for a specific attribute in the object tree.

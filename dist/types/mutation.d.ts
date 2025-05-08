@@ -6,7 +6,7 @@
  * @param index - index of the attribute currently traversed.
  * @returns - attribute value if found or default value passed as 'def'.
  */
-export declare function getAttribute<T>(model: any, key: string | string[], defaultValue?: T, index?: number): any;
+export declare function getAttribute<T>(model: any, key: string | string[], defaultValue?: T): any;
 /**
  *
  * @param model - state object to be updated.
@@ -32,7 +32,7 @@ export declare function setAttributeMutatedMultiple<T>(model: any, value: T, def
  * @param path - qualified paths of the attribute.
  * @returns - value of mutation in state object.
  */
-export declare function getAttributeMutation<T>(model: any, path: string): T;
+export declare function getAttributeMutation<T>(model: any, defaultValue: T, path: string): T;
 /**
  *
  * @param model - state object to be updated.
