@@ -41,4 +41,4 @@ export declare function getAttributeMutation<T>(model: any, defaultValue: T, pat
  * @returns - updated state object.
  */
 export declare function setAttributeMutated<T>(model: any, value: T, defaultValue: T, path: string): any;
-//# sourceMappingURL=mutation.d.ts.map
+//# sourceMappingURL=Mutation.d.ts.map

@@ -42,4 +42,4 @@ export declare function setMutatedAllAttributes<DType, T>(state: MutatedState<DT
  * @param mutationTemplate - The initial mutation template to reset to.
  */
 export declare function clearMutatedState<DType, T>(state: MutatedState<DType, T>, mutationTemplate: MutatedAttribute<DType, T>): void;
-//# sourceMappingURL=mutation-state.d.ts.map
+//# sourceMappingURL=MutationState.d.ts.map

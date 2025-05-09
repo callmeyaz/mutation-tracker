@@ -51,4 +51,4 @@ declare function track<DType extends {
 }, T>(target: DType, config: MutationConfig<T>): IMutationTracker<DType, T>;
 export declare const MutationTracker: typeof track;
 export {};
-//# sourceMappingURL=mutation-tracker.d.ts.map
+//# sourceMappingURL=MutationTracker.d.ts.map

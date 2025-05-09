@@ -122,4 +122,4 @@ export function setAttributeMutated(model, value, defaultValue, path) {
     }
     return copy;
 }
-//# sourceMappingURL=mutation.js.map
+//# sourceMappingURL=Mutation.js.map

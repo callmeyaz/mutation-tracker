@@ -10,7 +10,3 @@ export type MutatedAttribute<DType, T> = {
   ? (DType[Key][number] extends object ? MutatedAttribute<DType[Key][number], T>[] : T[])
   : (DType[Key] extends object ? MutatedAttribute<DType[Key], T> : T);
 };
-
-export interface KeyValuePair {
-  [field: string]: any;
-}

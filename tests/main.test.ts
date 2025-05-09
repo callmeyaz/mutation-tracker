@@ -1,5 +1,5 @@
-import { expect, test } from "../utils/micro-tester";
-import { MutationTracker } from "../src/mutation-tracker";
+import { expect, test } from "../utils/MicroTester";
+import { MutationTracker } from "../src/lib/MutationTracker";
 
 var user = {
   name: {

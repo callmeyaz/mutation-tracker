@@ -1,5 +1,5 @@
 import cloneDeep from "lodash-es/cloneDeep";
-import { setAttributeMutated, setAttributeMutatedMultiple, setAllAttributesMuted, getAttributeMutation } from "./mutation";
+import { setAttributeMutated, setAttributeMutatedMultiple, setAllAttributesMuted, getAttributeMutation } from "./Mutation";
 /**
  * Retrieves the mutation descriptor for a specific attribute in the object tree.
  * @param state - The current state object.
@@ -53,4 +53,4 @@ export function setMutatedAllAttributes(state, value) {
 export function clearMutatedState(state, mutationTemplate) {
     state.mutation = cloneDeep(mutationTemplate);
 }
-//# sourceMappingURL=mutation-state.js.map
+//# sourceMappingURL=MutationState.js.map

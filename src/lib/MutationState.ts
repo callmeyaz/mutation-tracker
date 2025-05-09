@@ -4,7 +4,7 @@ import {
   setAttributeMutatedMultiple,
   setAllAttributesMuted,
   getAttributeMutation
-} from "./mutation";
+} from "./Mutation";
 import { MutatedAttribute } from "./MutatedAttribute";
 import { MutatedState } from "./MutatedState";
 

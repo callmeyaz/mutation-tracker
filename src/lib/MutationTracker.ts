@@ -12,7 +12,7 @@ import {
   setMutatedAllAttributes,
   setMutatedByAttributePath,
   setMutatedByAttributePaths
-} from "./mutation-state";
+} from "./MutationState";
 import { MutatedAttribute } from "./MutatedAttribute";
 
 /**

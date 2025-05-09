@@ -4,7 +4,7 @@
  * and clear mutation descriptors for attributes in the object tree.
  */
 import cloneDeep from "lodash-es/cloneDeep";
-import { buildMutationFromObject as buildMutationTemplateFromObject, clearMutatedState, getMutationByAttributePath, setMutatedAllAttributes, setMutatedByAttributePath, setMutatedByAttributePaths } from "./mutation-state";
+import { buildMutationFromObject as buildMutationTemplateFromObject, clearMutatedState, getMutationByAttributePath, setMutatedAllAttributes, setMutatedByAttributePath, setMutatedByAttributePaths } from "./MutationState";
 /**
  *
  * @param config - Configuration object.
@@ -60,4 +60,4 @@ function track(target, config) {
     };
 }
 export const MutationTracker = track;
-//# sourceMappingURL=mutation-tracker.js.map
+//# sourceMappingURL=MutationTracker.js.map
