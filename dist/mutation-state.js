@@ -1,16 +1,6 @@
 import cloneDeep from "lodash-es/cloneDeep";
 import { setAttributeMutated, setAttributeMutatedMultiple, setAllAttributesMuted, getAttributeMutation } from "./mutation";
 /**
- * Updates the mutation descriptor for an attribute in object tree.
- * @param state - The current state object.
- * @param mutation - The new mutation descriptor to set.
- * @returns - A new state object with the updated mutation descriptor.
- */
-export function setMutatedByAttribute(state, value) {
-    var newState = { ...state, mutation: value };
-    return newState;
-}
-/**
  * Retrieves the mutation descriptor for a specific attribute in the object tree.
  * @param state - The current state object.
  * @param attributePath - The path to the attribute (dot-separated string).
@@ -24,7 +14,6 @@ export function getMutationByAttributePath(state, defaultValue, attributePath) {
  * @param state - The current state object.
  * @param value - The new mutation value to set.
  * @param attribute - The path to the attribute (dot-separated string).
- * @returns - A new state object with the updated mutation descriptor.
  */
 export function setMutatedByAttributePath(state, value, defaultValue, attributePath) {
     state.mutation = setAttributeMutated(state.mutation, value, defaultValue, attributePath);
@@ -34,7 +23,6 @@ export function setMutatedByAttributePath(state, value, defaultValue, attributeP
  * @param state - The current state object.
  * @param value - The new mutation value to set.
  * @param attributePaths - An array of paths to the attributes (dot-separated strings).
- * @returns - A new state object with the updated mutation descriptors.
  */
 export function setMutatedByAttributePaths(state, value, defaultValue, attributePaths) {
     state.mutation = setAttributeMutatedMultiple(state.mutation, value, defaultValue, ...attributePaths);
@@ -53,7 +41,6 @@ export function buildMutationFromObject(model, value) {
  * Updates the mutation descriptor for all attributes in the object tree.
  * @param state Current state object.
  * @param mutation The new mutation value to set for all attributes.
- * @returns A new state object with the updated mutation descriptor.
  */
 export function setMutatedAllAttributes(state, value) {
     state.mutation = setAllAttributesMuted(state.mutation, value);

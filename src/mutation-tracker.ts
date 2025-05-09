@@ -9,11 +9,11 @@ import {
   buildMutationFromObject as buildMutationTemplateFromObject,
   clearMutatedState,
   getMutationByAttributePath,
-  MutatedAttribute,
   setMutatedAllAttributes,
   setMutatedByAttributePath,
   setMutatedByAttributePaths
 } from "./mutation-state";
+import { MutatedAttribute } from "./MutatedAttribute";
 
 /**
  * It allows you to set, get, and clear mutations for 

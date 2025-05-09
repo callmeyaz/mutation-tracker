@@ -16,7 +16,7 @@ export function getAttribute<T>(
   model: any,
   key: string | string[],
   defaultValue?: T
-) {
+): any {
   const path = toPath(key);
   var index: number = 0;
 

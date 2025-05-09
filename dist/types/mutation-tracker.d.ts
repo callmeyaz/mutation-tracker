@@ -3,7 +3,7 @@
  * mutations in a nested object tree. It includes functions to set, retrieve,
  * and clear mutation descriptors for attributes in the object tree.
  */
-import { MutatedAttribute } from "./mutation-state";
+import { MutatedAttribute } from "./MutatedAttribute";
 /**
  * It allows you to set, get, and clear mutations for
  * specific attributes or all attributes in the

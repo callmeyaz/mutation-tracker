@@ -13,7 +13,6 @@ var user = {
   address: "123 Happy Street"
 }
 
-
 test('When-Initial-Mutation-Is-Set-Value-Is-Set', () => {
   var tracker = MutationTracker<typeof user, boolean>(user, {
     initialMutation: {
@@ -112,7 +111,7 @@ test('When-Reset-Values-Are-Cleared-With-InitialMutation-Set-1', () => {
   tracker.setMutatedByAttributeNames(true, ["roles[0]", "roles[1]"]);
   tracker.setMutatedByAttributeNames(true, ["name.firstname", "name.lastname"]);
   tracker.reset();
-  
+
   expect(tracker.state.roles?.[0]).toBe(false);
   expect(tracker.state.roles?.[1]).toBe(false);
   expect(tracker.state.name?.firstname).toBe(true);
@@ -133,7 +132,7 @@ test('When-Clear-Values-Are-Cleared-Without-InitialMutation-Set', () => {
   tracker.setMutatedByAttributeNames(true, ["roles[0]", "roles[1]"]);
   tracker.setMutatedByAttributeNames(true, ["name.firstname", "name.lastname"]);
   tracker.clear();
-  
+
   expect(tracker.state.roles?.[0]).toBe(false);
   expect(tracker.state.roles?.[1]).toBe(false);
   expect(tracker.state.name?.firstname).toBe(false);
@@ -154,7 +153,7 @@ test('When-Set-All-Values-Are-Set', () => {
 
   tracker.setMutatedByAttributeNames(true, ["name.firstname", "name.lastname"]);
   tracker.setAll(true);
-  
+
   expect(tracker.state.roles?.[0]).toBe(true);
   expect(tracker.state.roles?.[1]).toBe(true);
   expect(tracker.state.name?.firstname).toBe(true);
