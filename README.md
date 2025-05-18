@@ -1,4 +1,4 @@
-# mutation-tracker 1.0.34
+# mutation-tracker 1.0.36
 
 ### Why?
 
