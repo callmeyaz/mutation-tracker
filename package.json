@@ -10,6 +10,7 @@
   },
   "scripts": {
     "build": "tsc",
+    "benchmark": "tsx ./src/benchmark/index.ts",
     "test": "tsx ./tests/main.test.ts",
     "start": "tsx ./tests/main.test.ts",
     "dev": "npm run pkg && npm install && npm run start && npm run build",
@@ -19,7 +20,9 @@
   "types": "./dist/types/main.d.ts",
   "type": "module",
   "devDependencies": {
+    "@types/benchmark": "^2.1.5",
     "@types/lodash-es": "^4.17.12",
+    "benchmark": "^2.1.4",
     "lodash-es": "^4.17.21",
     "ts-node": "^10.9.2",
     "tsx": "^4.19.4",
