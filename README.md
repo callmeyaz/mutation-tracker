@@ -14,6 +14,7 @@ Consider the following example:
 
 ```javascript
 
+// sample JSON object
 var user = {
 	name: {
 		firstname: "John",
@@ -25,11 +26,12 @@ var user = {
 	address: "123 Main Street"
 }
 
+// initialize tracker using boolean mutation descriptor
 var tracker = MutationTracker<typeof user, boolean>(user, {
   defaultValue: false
 });
 
-// Following state is created within mutation-tracker:
+// a mirror state is created within mutation-tracker:
 //	var user = {
 //		name: {
 //			firstname: false,
