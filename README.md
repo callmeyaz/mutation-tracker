@@ -66,7 +66,7 @@ console.log("is firstname mutated? ", mutation);
 
 ```
 
-Above, we are using boolean datatype/descriptor as a flag to track mutation but we can also use other data types as mutation flags.
+Above, we are using boolean mutation descriptor track mutation but we can also use other data types as mutation flags such as number or another JSON object.
 
 check out the npm package **[form-runner](https://www.npmjs.com/package/form-runner)** that uses **[mutation-tracker](https://www.npmjs.com/package/mutation-tracker)** to implement unopinionated front-end form validation library.
 
