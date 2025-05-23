@@ -1,7 +1,5 @@
 # mutation-tracker 1.0.36
 
-### Why?
-
 Mutation-Tracker is used for keeping track of **dirty** state of properties within JSON objects.
 
 Let us suppose, we have a JSON object that has mutated multiple times, and we need to track properties that are changed.
@@ -66,59 +64,14 @@ console.log("is firstname mutated? ", mutation);
 
 ```
 
-Above, we are using boolean mutation descriptor track mutation but we can also use other data types as mutation flags such as number or another JSON object.
-
 check out the npm package **[form-runner](https://www.npmjs.com/package/form-runner)** that uses **[mutation-tracker](https://www.npmjs.com/package/mutation-tracker)** to implement unopinionated front-end form validation library.
 
-### How?
-Mutation-Tracker internally maintains a mirror state object to track changes.
-
-Once, we initialize a tracker by providing a source JSON object, mutation library internally replicates the structure of the JSON object to create a ***state***. 
-
-With given APIs, we record the mutations by setting the mutation value and full qualified path of the properties which can later be retrieved.
-
-In case a new property is added to the JSON object after initializing the tracker, we can still request to track changes to this property. 
-
-This feature enables support for tracking change in un-typed JSON objects such as **{}**. 
+### Mutation descriptor
+Mutation descriptor is a information that we want to associate with each mutated property with we set its mutation state.
+In previous example, we are using **boolean** mutation descriptor track mutation but we can also use other data types such as number, date, string, etc.
 
 
-Below is a sample JSON object.
-
-```javascript
-var user = {
-	name: {
-		firstname: "John",
-		lastname: "Doe"
-	},
-	address: "123 Main Street"
-}
-```
-Below is one of the ways to initialize mutation-tracker instance.
-
-```javascript
-// Below we are using **boolean** as the mutation descriptor type.
-var tracker = MutationTracker<typeof user, boolean>(user, {
-  defaultValue: false
-});
-```
-Below is how mutation-tracker library would store the state as:
-
-```javascript
-var user = {
-	name: {
-		firstname: false,
-		lastname: false
-	},
-	address: false
-}
-```
-
-### Mutation descriptor?
-Mutation descriptor is the type of mutation information that we want to associate with each mutated property. In above exampled we have used a **boolean** type descriptor but we can use any descriptor type we want.
-It is suggested though to keep descriptor type as simple as possible.
-
-
-### Usage?
+### Usage
 
 Consider the HTML below:
 
