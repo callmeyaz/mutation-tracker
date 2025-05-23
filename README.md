@@ -26,7 +26,7 @@ var user = {
 	address: "123 Main Street"
 }
 
-// initialize tracker using boolean mutation descriptor
+// initialize tracker using 'boolean' mutation descriptor
 var tracker = MutationTracker<typeof user, boolean>(user, {
   defaultValue: false
 });
