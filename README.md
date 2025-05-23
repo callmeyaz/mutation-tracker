@@ -8,7 +8,7 @@ Let us suppose, we have a JSON object that has mutated multiple times, and we ne
 
 This is where the ***mutation-tracker*** library shines.
 
-Mutation-tracker provides a set of APIs to flag mutations within JSON objects using dot-separated path to the properties within the objects.
+Mutation-tracker provides a set of APIs to flag mutations within JSON objects using path to properties using dot-notation.
 
 Consider the following example:
 
