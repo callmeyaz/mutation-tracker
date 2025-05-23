@@ -2,15 +2,15 @@
 
 ### Why?
 
-Mutation-Tracker tracks **dirty** state of JSON objects so that we can mark changes in the object for delayed synchronization.
+Mutation-Tracker is used for keeping trach of **dirty** state of properties within a JSON objects.
 
-Imagine we have a JSON object that undergoes mutation multiple times, and we need to track what properties are changed.
+Let us suppose, we have a JSON object that is mutated multiple times, and we need to track of properties that are changed.
 
 This is where the ***mutation-tracker*** library shines.
 
-Mutation-tracker provides a set of APIs to record mutations for JSON objects using fully qualified name of the object properties.
+Mutation-tracker provides a set of APIs to flag mutations within JSON objects using dot-separated path to the properties within the objects.
 
-Below is an example of tracking a change in property having fully qualified name as "name.firstname":
+Consider the following example:
 
 ```javascript
 
@@ -19,6 +19,9 @@ var user = {
 		firstname: "John",
 		lastname: "Doe"
 	},
+	role: [
+		"admin"
+	]
 	address: "123 Main Street"
 }
 
@@ -26,8 +29,39 @@ var tracker = MutationTracker<typeof user, boolean>(user, {
   defaultValue: false
 });
 
+// Following state is created within mutation-tracker:
+//	var user = {
+//		name: {
+//			firstname: false,
+//			lastname: false
+//		},
+//		role: [
+//			false
+//		],
+//		address: false
+//	}
+
 // set name.firstname property as mutated by setting a boolean flag to true.
 tracker.setMutatedByAttributeName(true, "name.firstname");
+
+// The updated state within mutation-tracker will then be:
+//	var user = {
+//		name: {
+//			firstname: true,
+//			lastname: false
+//		},
+//		role: [
+//			false
+//		],
+//		address: false
+//	}
+
+// the mutation state information can be accessed as:
+
+var mutation = tracker.state.name?.firstname;
+
+console.log("is firstname mutated? ", mutation);
+
 ```
 
 Above, we are using boolean datatype/descriptor as a flag to track mutation but we can also use other data types as mutation flags.
