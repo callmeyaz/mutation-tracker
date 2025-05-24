@@ -1,6 +1,6 @@
 # mutation-tracker 1.0.36
 
-Mutation-Tracker is used for keeping track of **dirty** state of properties within JSON objects.
+Mutation-Tracker is built for keeping track of **dirty** state of properties within JSON objects.
 
 Let us suppose, we have a JSON object that has mutated multiple times, and we need to track properties that are changed.
 
