@@ -66,12 +66,13 @@ console.log("is firstname mutated? ", mutation);
 
 check out the npm package **[form-runner](https://www.npmjs.com/package/form-runner)** that uses **[mutation-tracker](https://www.npmjs.com/package/mutation-tracker)** to implement unopinionated front-end form validation library.
 
-### Mutation descriptor
-Mutation descriptor is a information that we want to associate with each mutated property with we set its mutation state.
-In previous example, we are using **boolean** mutation descriptor track mutation but we can also use other data types such as number, date, string, etc.
+### What is Mutation descriptor?
+Mutation descriptor is information/tag that is associated to each mutated or non-mutated property.
+In previous example, we are using **boolean** type mutation descriptor to track mutation.
+We can also use other data types such as number, date, string, etc for mutation descriptor type.
 
 
-### Usage
+### How to Use Mutation-Tracker?
 
 Consider the HTML below:
 
