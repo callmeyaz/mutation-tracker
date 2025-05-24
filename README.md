@@ -117,9 +117,9 @@ console.log(JSON.stringify(tracker.state));
 
 ### Examples
 
-Below are a few example that shows some but not all of the potential of mutation-tracker library.
+Below are a few example that shows some but not all of the potential uses of mutation-tracker library.
 
-#### 1 - Initialization with typed object
+#### 1 - Initialization with an existing object
 
 ```javascript
 var tracker = MutationTracker(user, { defaultValue: false });
@@ -127,7 +127,7 @@ console.log(JSON.stringify(tracker.state));
 // { name: { firstname: false, lastname: false }, address: false }
 ```
 
-#### 2 - Initialization with empty object
+#### 2 - Initialization with an empty object
 
 ```javascript
 var tracker = MutationTracker({}, { defaultValue: false });
@@ -135,7 +135,7 @@ console.log(JSON.stringify(tracker.state));
 // {}
 ```
 
-#### 3 - Set mutation for typed object
+#### 3 - Set mutation in an existing object
 
 ```javascript
 var tracker = MutationTracker(user, { defaultValue: false });
@@ -144,7 +144,7 @@ console.log(JSON.stringify(tracker.state));
 // { name: { firstname: true, lastname: false }, address: false }
 ```
 
-#### 4 - Set mutation for empty object
+#### 4 - Set mutation in an empty object
 
 ```javascript
 var tracker = MutationTracker({}, { defaultValue: false });
@@ -153,7 +153,7 @@ console.log(JSON.stringify(tracker.state));
 // { name: { firstname: true }
 ```
 
-#### 5 - Set mutation on initialization
+#### 5 - Set mutation at initialization
 
 ```javascript
 var tracker = MutationTracker({}, {
@@ -182,7 +182,7 @@ console.log(JSON.stringify(tracker.state));
 // { name: { firstname: true, lastname: true }, address: false }
 ```
 
-#### 7 - Get mutation value of attribute
+#### 7 - Check mutation of an attribute
 
 ```javascript
 var tracker = MutationTracker(user, { defaultValue: false });
@@ -196,7 +196,7 @@ console.log("address: ", tracker.getMutatedByAttributeName("address"));
 // address: false
 ```
 
-#### 8 - Set all mutations
+#### 8 - Set all attributes as mutated
 
 ```javascript
 var tracker = MutationTracker(user, { defaultValue: false });
@@ -206,7 +206,7 @@ console.log(JSON.stringify(tracker.state));
 ```
 
 
-#### 9 - Reset mutations
+#### 9 - Reset mutations on all attributes
 
 ```javascript
 var tracker = MutationTracker({}, {
@@ -228,7 +228,7 @@ console.log(JSON.stringify(tracker.state));
 // { name: { firstname: true, lastname: false }, address: false }
 ```
 
-#### 10 - Clear mutations
+#### 10 - Clear mutations on all attributes
 
 ```javascript
 var tracker = MutationTracker({}, {
@@ -252,7 +252,7 @@ console.log(JSON.stringify(tracker.state));
 // { name: { firstname: false, lastname: false }, address: false }
 ```
 
-#### 11 - Including new attribute for mutation
+#### 11 - Add mutation tracking of a new attribute
 
 ```javascript
 var tracker = MutationTracker(user, { defaultValue: false });
@@ -267,7 +267,7 @@ console.log(JSON.stringify(tracker.state));
 // { name: { firstname: false, lastname: false }, age: true, role [ true, true ], address: false }
 ```
 
-#### 12 - Using **number** as mutation descriptor
+#### 12 - Using **number** mutation descriptor
 
 ```javascript
 var tracker = MutationTracker<number>(user, { defaultValue: 0 });
