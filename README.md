@@ -2,11 +2,11 @@
 
 Mutation-Tracker is built for keeping track of **dirty** state of properties within JSON objects.
 
-Let us suppose, we have a JSON object that has mutated multiple times, and we need to track properties that are changed.
+Let us suppose, we have a JSON object that mutates multiple times, and we need to track the properties that are changed with every mutation.
 
 This is where the ***mutation-tracker*** library shines.
 
-Mutation-tracker provides a set of APIs to flag mutations within JSON objects using path to properties using dot-notation.
+Mutation-tracker provides a set of APIs to set mutation descriptor to properties that have mutated within JSON objects.
 
 Consider the following example:
 
@@ -24,12 +24,12 @@ var user = {
 	address: "123 Main Street"
 }
 
-// initialize tracker using 'boolean' mutation descriptor
+// initialize tracker using 'boolean' as mutation descriptor type
 var tracker = MutationTracker<typeof user, boolean>(user, {
   defaultValue: false
 });
 
-// a mirror state is created within mutation-tracker:
+// a mirror state is created within mutation-tracker accessed using `state` property:
 //	var user = {
 //		name: {
 //			firstname: false,
@@ -41,10 +41,10 @@ var tracker = MutationTracker<typeof user, boolean>(user, {
 //		address: false
 //	}
 
-// set name.firstname property as mutated by setting a boolean flag to true.
+// set `name.firstname` property as mutated by setting a boolean descriptor as true.
 tracker.setMutatedByAttributeName(true, "name.firstname");
 
-// The updated state within mutation-tracker will then be:
+// The updated state within mutation-tracker will now be:
 //	var user = {
 //		name: {
 //			firstname: true,
@@ -56,7 +56,7 @@ tracker.setMutatedByAttributeName(true, "name.firstname");
 //		address: false
 //	}
 
-// the mutation state information can be accessed as:
+// the mutation `state` information can be accessed as below:
 
 var mutation = tracker.state.name?.firstname;
 
