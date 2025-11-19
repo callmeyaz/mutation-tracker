@@ -305,7 +305,7 @@ below is the list of functions and properties available with mutation-tracker.
 
 | Property/Function  |  Description |
 | ------------ | ------------ |
-|  MutationTracker<T, Values>(target: Values, config: MutationConfig<T>) | constructor   |
+|  MutationTracker<T, Values>(target: Values, config: MutationConfig<T>) | Create tracker instance   |
 |  MutationTracker.setMutatedByAttributeName() | sets mutation flag for a qualified attribute name  |
 | MutationTracker.setMutatedByAttributeNames()  |  sets mutation flag for multiple qualified attribute names  |
 | MutationTracker.getMutatedByAttributeName()  |  gets mutation flag for a qualified attribute name  |
