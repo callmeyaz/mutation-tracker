@@ -303,18 +303,18 @@ console.log(JSON.stringify(tracker.state));
 
 below is the list of functions and properties available with mutation-tracker.
 
-| Property/Function  |  Description |
-| ------------ | ------------ |
-|  MutationTracker<T, Values>(target: Values, config: MutationConfig<T>) | Create tracker instance   |
-|  setMutatedByAttributeName() | sets mutation flag for a qualified attribute name  |
-| setMutatedByAttributeNames()  |  sets mutation flag for multiple qualified attribute names  |
-| getMutatedByAttributeName()  |  gets mutation flag for a qualified attribute name  |
-| reset()  |  Sets mutation tracking back to the initialized state such as reapplying initial mutation settings |
-| setAll()  |  Sets mutation for tracked attributes to *true* |
-| clear()  |  For tracking Without *Type*, removes all mutation tracking. For  tracking with a *Type*, sets all mutations to *default value* |
-| initiallyMutatedAttributes  | Returns list of qualified attribute names, initially set as mutated |
-| initiallyMutatedValue  | Returns value set for initially mutated qualified attribute names |
-| state  | Returns object that represents current state of tracked mutations |
+| Members  | Type |  Description |
+| ------------ | ----- | ------------ |
+|  MutationTracker<T, Values>(target: Values, config: MutationConfig<T>) | constructor | Create tracker instance   |
+|  setMutatedByAttributeName() | function | sets mutation flag for a qualified attribute name  |
+| setMutatedByAttributeNames() | function  |  sets mutation flag for multiple qualified attribute names  |
+| getMutatedByAttributeName() | function  |  gets mutation flag for a qualified attribute name  |
+| reset()  | function |  Sets mutation tracking back to the initialized state such as reapplying initial mutation settings |
+| setAll()  | function |  Sets mutation for tracked attributes to *true* |
+| clear()  | function |  For tracking Without *Type*, removes all mutation tracking. For  tracking with a *Type*, sets all mutations to *default value* |
+| initiallyMutatedAttributes  | readonly property | Returns list of qualified attribute names, initially set as mutated |
+| initiallyMutatedValue  | readonly property | Returns value set for initially mutated qualified attribute names |
+| state  | readonly property | Returns object that represents current state of tracked mutations |
 
 ## MutationConfig
 below is the list of properties avaiable on configuration object to initialize mutation-tracker.
