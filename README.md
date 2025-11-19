@@ -1,14 +1,17 @@
 # mutation-tracker 1.0.36
 
-Mutation-Tracker is built for keeping track of **dirty** state of properties within JSON objects.
+Mutation-Tracker is a new library to associate metadata to properties within JSON objects within the object tree.
 
-Let us suppose, we have a JSON object that mutates multiple times, and we need to track the properties that are changed with every mutation.
+# What problem does mutation-tracker solve?
 
-This is where the ***mutation-tracker*** library shines.
+With the APIs provided by mutation-tracker, by associating metadata to properties of JSON objects we can:
+* Track changes in the JSON pbjects by marking the changed properties
+* Track how many times some properties are changed in a JSON object
+* Associate statistics to properties in a JSON.
 
-Mutation-tracker provides a set of APIs to set mutation descriptor to properties that have mutated within JSON objects.
+# Usage
 
-Consider the following example:
+Consider the following example where we have a complex JSON object and for every property in this object we want to associate a flag to represent whether the property value has ever changed or not.
 
 ```javascript
 
@@ -24,12 +27,27 @@ var user = {
 	address: "123 Main Street"
 }
 
+```
+
+Below is how we would use mutation-tracker to initialize a tracker instance for our *User* object. The great thing about mutation-tracker is that it can auto generate internal state using the object type provided at the time of initialization.
+Also, below we have used *boolean* as type of metadata (mutation-descriptor).
+
+Mutation descriptor is information/tag that is associated to each mutated or non-mutated property.
+We can use other data types such as number, date, string, etc for mutation descriptor type.
+
+```javascript
+
 // initialize tracker using 'boolean' as mutation descriptor type
 var tracker = MutationTracker<typeof user, boolean>(user, {
   defaultValue: false
 });
 
-// a mirror state is created within mutation-tracker accessed using `state` property:
+```
+
+Once a tracker instance is initialized, it internally creates and manages an state that mirrors the structure of the *User* object as below:
+
+```javascript
+
 //	var user = {
 //		name: {
 //			firstname: false,
@@ -40,6 +58,13 @@ var tracker = MutationTracker<typeof user, boolean>(user, {
 //		],
 //		address: false
 //	}
+
+```
+
+Below is how we update the tracker for a change in value of a property "name.firstname": 
+
+
+```javascript
 
 // set `name.firstname` property as mutated by setting a boolean descriptor as true.
 tracker.setMutatedByAttributeName(true, "name.firstname");
@@ -66,13 +91,7 @@ console.log("is firstname mutated? ", mutation);
 
 check out the npm package **[form-runner](https://www.npmjs.com/package/form-runner)** that uses **[mutation-tracker](https://www.npmjs.com/package/mutation-tracker)** to implement unopinionated front-end form validation library.
 
-### What is Mutation descriptor?
-Mutation descriptor is information/tag that is associated to each mutated or non-mutated property.
-In previous example, we are using **boolean** type mutation descriptor to track mutation.
-We can also use other data types such as number, date, string, etc for mutation descriptor type.
-
-
-### How to Use Mutation-Tracker?
+# How to Use Mutation-Tracker For an HTML Form?
 
 Consider the HTML below:
 
