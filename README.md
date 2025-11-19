@@ -4,7 +4,8 @@ Mutation-Tracker is a new library to associate metadata to properties within JSO
 
 # What problem does mutation-tracker solve?
 
-With the APIs provided by mutation-tracker, by associating metadata to properties of JSON objects we can:
+By associating metadata to properties of JSON objects we can:
+
 * Track changes in the JSON pbjects by marking the changed properties
 * Track how many times some properties are changed in a JSON object
 * Associate statistics to properties in a JSON.
