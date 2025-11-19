@@ -306,23 +306,23 @@ below is the list of functions and properties available with mutation-tracker.
 | Property/Function  |  Description |
 | ------------ | ------------ |
 |  MutationTracker<T, Values>(target: Values, config: MutationConfig<T>) | Create tracker instance   |
-|  MutationTracker.setMutatedByAttributeName() | sets mutation flag for a qualified attribute name  |
-| MutationTracker.setMutatedByAttributeNames()  |  sets mutation flag for multiple qualified attribute names  |
-| MutationTracker.getMutatedByAttributeName()  |  gets mutation flag for a qualified attribute name  |
-| MutationTracker.reset()  |  Sets mutation tracking back to the initialized state such as reapplying initial mutation settings |
-| MutationTracker.setAll()  |  Sets mutation for tracked attributes to *true* |
-| MutationTracker.clear()  |  For tracking Without *Type*, removes all mutation tracking. For  tracking with a *Type*, sets all mutations to *default value* |
-| MutationTracker.initiallyMutatedAttributes  | Returns list of qualified attribute names, initially set as mutated |
-| MutationTracker.initiallyMutatedValue  | Returns value set for initially mutated qualified attribute names |
-| MutationTracker.state  | Returns object that represents current state of tracked mutations |
+|  setMutatedByAttributeName() | sets mutation flag for a qualified attribute name  |
+| setMutatedByAttributeNames()  |  sets mutation flag for multiple qualified attribute names  |
+| getMutatedByAttributeName()  |  gets mutation flag for a qualified attribute name  |
+| reset()  |  Sets mutation tracking back to the initialized state such as reapplying initial mutation settings |
+| setAll()  |  Sets mutation for tracked attributes to *true* |
+| clear()  |  For tracking Without *Type*, removes all mutation tracking. For  tracking with a *Type*, sets all mutations to *default value* |
+| initiallyMutatedAttributes  | Returns list of qualified attribute names, initially set as mutated |
+| initiallyMutatedValue  | Returns value set for initially mutated qualified attribute names |
+| state  | Returns object that represents current state of tracked mutations |
 
 ## MutationConfig
 below is the list of properties avaiable on configuration object to initialize mutation-tracker.
 
 | Property/Function  |  Description |
 | ------------ | ------------ |
-|  MutationConfig.initialMutation | configuration for initial mutation  |
-|  MutationConfig.initialMutation.mutatedAttributes | list of qualified attribute names, initially set as mutated  |
-|  MutationConfig.initialMutation.mutatedValue | value set for initially mutated qualified attribute names  |
-|  MutationConfig.defaultValue | Default value set when functions MutationTracker.resetAll() or MutationTracker.clear() are called |
+|  initialMutation | configuration for initial mutation  |
+|  initialMutation.mutatedAttributes | list of qualified attribute names, initially set as mutated  |
+|  initialMutation.mutatedValue | value set for initially mutated qualified attribute names  |
+|  defaultValue | Default value set when functions MutationTracker.resetAll() or MutationTracker.clear() are called |
 
