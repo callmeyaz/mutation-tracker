@@ -7,11 +7,11 @@ Mutation-Tracker is a new library to associate and track metadata to properties 
 
 # Why Mutation Tracker?
 
-By associating metadata to properties of JSON objects we can:
+By associating and managing metadata in a mirro object to properties of JSON objects we can:
 
-* Track changes in the JSON pbjects by marking the changed properties
-* Track how many times some properties are changed in a JSON object
-* Associate statistics to properties in a JSON.
+* Track changes to a JSON objects, by registering the changes to properties
+* Track how many times some properties are mutated and maintain statistics for those properties in the JSON object
+* Avoid writing boiler plate code for every new JSON object type.
 
 # Usage
 
