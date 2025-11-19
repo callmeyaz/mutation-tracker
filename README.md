@@ -135,11 +135,11 @@ console.log(JSON.stringify(tracker.state));
 // { name: { firstname: true, lastname: false }, roles: [ true ], address: false }
 ```
 
-### Examples
+# Examples
 
 Below are a few example that shows some but not all of the potential uses of mutation-tracker library.
 
-#### 1 - Initialization with an existing object
+## 1 - Initialization with an existing object
 
 ```javascript
 var tracker = MutationTracker(user, { defaultValue: false });
@@ -147,7 +147,7 @@ console.log(JSON.stringify(tracker.state));
 // { name: { firstname: false, lastname: false }, address: false }
 ```
 
-#### 2 - Initialization with an empty object
+## 2 - Initialization with an empty object
 
 ```javascript
 var tracker = MutationTracker({}, { defaultValue: false });
@@ -155,7 +155,7 @@ console.log(JSON.stringify(tracker.state));
 // {}
 ```
 
-#### 3 - Set mutation in an existing object
+## 3 - Set mutation in an existing object
 
 ```javascript
 var tracker = MutationTracker(user, { defaultValue: false });
@@ -164,7 +164,7 @@ console.log(JSON.stringify(tracker.state));
 // { name: { firstname: true, lastname: false }, address: false }
 ```
 
-#### 4 - Set mutation in an empty object
+## 4 - Set mutation in an empty object
 
 ```javascript
 var tracker = MutationTracker({}, { defaultValue: false });
@@ -173,7 +173,7 @@ console.log(JSON.stringify(tracker.state));
 // { name: { firstname: true }
 ```
 
-#### 5 - Set mutation at initialization
+## 5 - Set mutation at initialization
 
 ```javascript
 var tracker = MutationTracker({}, {
@@ -190,7 +190,7 @@ console.log(JSON.stringify(tracker.state));
 // { name: { firstname: true, lastname: true }, address: false }
 ```
 
-#### 6 - Set multiple mutations
+## 6 - Set multiple mutations
 
 ```javascript
 var tracker = MutationTracker(user, { defaultValue: false });
@@ -202,7 +202,7 @@ console.log(JSON.stringify(tracker.state));
 // { name: { firstname: true, lastname: true }, address: false }
 ```
 
-#### 7 - Check mutation of an attribute
+## 7 - Check mutation of an attribute
 
 ```javascript
 var tracker = MutationTracker(user, { defaultValue: false });
@@ -216,7 +216,7 @@ console.log("address: ", tracker.getMutatedByAttributeName("address"));
 // address: false
 ```
 
-#### 8 - Set all attributes as mutated
+## 8 - Set all attributes as mutated
 
 ```javascript
 var tracker = MutationTracker(user, { defaultValue: false });
@@ -226,7 +226,7 @@ console.log(JSON.stringify(tracker.state));
 ```
 
 
-#### 9 - Reset mutations on all attributes
+## 9 - Reset mutations on all attributes
 
 ```javascript
 var tracker = MutationTracker({}, {
@@ -248,7 +248,7 @@ console.log(JSON.stringify(tracker.state));
 // { name: { firstname: true, lastname: false }, address: false }
 ```
 
-#### 10 - Clear mutations on all attributes
+## 10 - Clear mutations on all attributes
 
 ```javascript
 var tracker = MutationTracker({}, {
@@ -272,7 +272,7 @@ console.log(JSON.stringify(tracker.state));
 // { name: { firstname: false, lastname: false }, address: false }
 ```
 
-#### 11 - Add mutation tracking of a new attribute
+## 11 - Add mutation tracking of a new attribute
 
 ```javascript
 var tracker = MutationTracker(user, { defaultValue: false });
@@ -287,7 +287,7 @@ console.log(JSON.stringify(tracker.state));
 // { name: { firstname: false, lastname: false }, age: true, role [ true, true ], address: false }
 ```
 
-#### 12 - Using **number** mutation descriptor
+## 12 - Using **number** mutation descriptor
 
 ```javascript
 var tracker = MutationTracker<number>(user, { defaultValue: 0 });
@@ -297,9 +297,9 @@ console.log(JSON.stringify(tracker.state));
 // { name: { firstname: 100, lastname: 200 }, address: 0 }
 ```
 
-## Documentation
+# Documentation
 
-### MutationTracker
+## MutationTracker
 
 below is the list of functions and properties available with mutation-tracker.
 
@@ -316,7 +316,7 @@ below is the list of functions and properties available with mutation-tracker.
 | MutationTracker.initiallyMutatedValue  | Returns value set for initially mutated qualified attribute names |
 | MutationTracker.state  | Returns object that represents current state of tracked mutations |
 
-### MutationConfig
+## MutationConfig
 below is the list of properties avaiable on configuration object to initialize mutation-tracker.
 
 | Property/Function  |  Description |
