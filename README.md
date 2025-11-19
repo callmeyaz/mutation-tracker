@@ -45,7 +45,7 @@ var tracker = MutationTracker<typeof user, boolean>(user, {
 
 ```
 
-Once a tracker instance is initialized, it internally creates and manages an state that mirrors the structure of the *User* object as below:
+Once a tracker instance is initialized, it internally creates and manages a mirrored state that mimics the structure of the *User* object and looks as below:
 
 ```javascript
 
