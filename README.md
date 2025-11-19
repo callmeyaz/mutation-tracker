@@ -3,7 +3,7 @@
 
 # Mutation Tracker 1.0
 
-Mutation-Tracker is a new library to associate and track metadata to properties within JSON objects within a mirror object tree.
+Mutation-Tracker is a new library to associate and track metadata to properties within JSON objects within an independent mirror object tree.
 
 # Why Mutation Tracker?
 
