@@ -5,6 +5,15 @@
 
 Mutation-Tracker is a new library to associate and track metadata to properties within JSON objects within an independent mirror object tree.
 
+# Installation
+
+Using npm:
+
+```javascript
+$ npm i -g npm
+$ npm i --save lodash
+```
+
 # Why Mutation Tracker?
 
 By associating and managing metadata in a mirro object to properties of JSON objects we can:
