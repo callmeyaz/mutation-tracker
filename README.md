@@ -11,7 +11,7 @@ Using npm:
 
 ```javascript
 $ npm i -g npm
-$ npm i --save lodash
+$ npm i --save mutation-tracker
 ```
 
 # Why Mutation Tracker?
