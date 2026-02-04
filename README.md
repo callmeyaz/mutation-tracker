@@ -10,7 +10,6 @@ Mutation-Tracker is a new library to associate and track metadata to properties 
 Using npm:
 
 ```javascript
-$ npm i -g npm
 $ npm i --save mutation-tracker
 ```
 
