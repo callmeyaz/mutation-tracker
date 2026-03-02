@@ -15,7 +15,7 @@ $ npm i --save mutation-tracker
 
 # Why Mutation Tracker?
 
-By associating and managing metadata in a mirro object to properties of JSON objects we can:
+By associating and managing metadata in a mirror object to properties of JSON objects we can:
 
 * Track changes to a JSON objects, by registering the changes to properties
 * Track how many times some properties are mutated and maintain statistics for those properties in the JSON object
@@ -302,7 +302,7 @@ console.log(JSON.stringify(tracker.state));
 ## 12 - Using **number** mutation descriptor
 
 ```javascript
-var tracker = MutationTracker<number>(user, { defaultValue: 0 });
+var tracker = MutationTracker<typeof user, number>(user, { defaultValue: 0 });
 tracker.setMutatedByAttributeName(100, "name.firstname");
 tracker.setMutatedByAttributeName(200, "name.lastname");
 console.log(JSON.stringify(tracker.state));
@@ -317,19 +317,19 @@ below is the list of functions and properties available with mutation-tracker.
 
 | Members  | Type |  Description |
 | ------------ | ----- | ------------ |
-|  MutationTracker<T, Values>(target: Values, config: MutationConfig<T>) | constructor | Create tracker instance   |
+|  MutationTracker<Values, T>(target: Values, config: MutationConfig<T>) | constructor | Create tracker instance   |
 |  setMutatedByAttributeName() | function | sets mutation flag for a qualified attribute name  |
 | setMutatedByAttributeNames() | function  |  sets mutation flag for multiple qualified attribute names  |
 | getMutatedByAttributeName() | function  |  gets mutation flag for a qualified attribute name  |
 | reset()  | function |  Sets mutation tracking back to the initialized state such as reapplying initial mutation settings |
-| setAll()  | function |  Sets mutation for tracked attributes to *true* |
-| clear()  | function |  For tracking Without *Type*, removes all mutation tracking. For  tracking with a *Type*, sets all mutations to *default value* |
+| setAll()  | function |  Sets mutation flag to the give value for all tracked attributes |
+| clear()  | function |  sets mutation flag to *default value*. This call ignores the initialMutation.mutatedAttributes setting of *MutationConfig* |
 | initiallyMutatedAttributes  | readonly property | Returns list of qualified attribute names, initially set as mutated |
 | initiallyMutatedValue  | readonly property | Returns value set for initially mutated qualified attribute names |
 | state  | readonly property | Returns object that represents current state of tracked mutations |
 
 ## MutationConfig
-below is the list of properties avaiable on configuration object to initialize mutation-tracker.
+below is the list of properties available on configuration object to initialize mutation-tracker.
 
 | Property/Function  |  Description |
 | ------------ | ------------ |
