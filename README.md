@@ -35,7 +35,7 @@ var user = {
 	},
 	role: [
 		"admin"
-	]
+	],
 	address: "123 Main Street"
 }
 
@@ -187,7 +187,7 @@ console.log(JSON.stringify(tracker.state));
 ## 5 - Set mutation at initialization
 
 ```javascript
-var tracker = MutationTracker({}, {
+var tracker = MutationTracker(user, {
 	defaultValue: false, 
 	initialMutation: {
 		mutatedAttributes: [
@@ -198,7 +198,7 @@ var tracker = MutationTracker({}, {
 	}
 });
 console.log(JSON.stringify(tracker.state));
-// { name: { firstname: true, lastname: true }, address: false }
+// { name: { firstname: true, lastname: true }, address: fals }
 ```
 
 ## 6 - Set multiple mutations
@@ -256,7 +256,7 @@ console.log(JSON.stringify(tracker.state));
 // { name: { firstname: true, lastname: true }, address: false }
 tracker.reset();
 console.log(JSON.stringify(tracker.state));
-// { name: { firstname: true, lastname: false }, address: false }
+// { name: { firstname: false, lastname: false }, address: false }
 ```
 
 ## 10 - Clear mutations on all attributes
@@ -271,6 +271,7 @@ var tracker = MutationTracker({}, {
 		mutatedValue: true
 	}
 });
+
 console.log(JSON.stringify(tracker.state));
 // { name: { firstname: true, lastname: false }, address: false }
 
